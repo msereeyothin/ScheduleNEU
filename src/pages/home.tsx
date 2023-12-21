@@ -1,0 +1,46 @@
+import AddCourseModal from "../components/AddCourse/AddCourseModal";
+import React from "react";
+import { CourseNode } from "../common/types";
+import CourseDropdown from "../components/Course/CourseDropdown";
+import SidebarContainer from "../components/Sidebar/SidebarContainer";
+import { alreadyExists } from "../common/utils";
+
+function Home() {
+  const [courseList, setCourseList] = React.useState<CourseNode[]>([]);
+
+  const handleAddCourse = (course: CourseNode) => {
+    setCourseList((prevCourseList) => [...prevCourseList, course]);
+    console.log(courseList);
+  };
+
+  const handleRemoveCourse = (course: CourseNode) => {
+    setCourseList((prevCourseList: CourseNode[]) =>
+      prevCourseList.filter((c: CourseNode) => c.classId !== course.classId)
+    );
+    console.log(courseList);
+  };
+  return (
+    <SidebarContainer>
+      {courseList.map((course) => {
+        return (
+          <CourseDropdown
+            course={course}
+            alreadyExists={alreadyExists(course, courseList)}
+            handleAdd={handleAddCourse}
+            handleRemove={handleRemoveCourse}
+          ></CourseDropdown>
+        );
+      })}
+      <div>
+        <AddCourseModal
+          termId=""
+          courseList={courseList}
+          handleAdd={handleAddCourse}
+          handleRemove={handleRemoveCourse}
+        ></AddCourseModal>
+      </div>
+    </SidebarContainer>
+  );
+}
+
+export default Home;
