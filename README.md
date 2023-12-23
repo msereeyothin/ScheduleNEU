@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# NuSchedule
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+to get started:
+- clone the repository
+- run ```npm install```
+- run ```npm start``` to start the development server
+
+[Figma Wireframe](https://www.figma.com/file/t3dX4cXyIJJQbww5ZcsaiD/ScheduleNU?type=design&node-id=0%3A1&mode=design&t=5mBW1rDSiLDQj4Kn-1)
 
 ## Available Scripts
 
