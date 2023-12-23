@@ -9,6 +9,7 @@ import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { dayToString } from "../../common/types";
 import { secondsToTime } from "../../common/utils";
+import SectionItem from "./SectionItem";
 
 interface CourseDropDownProps {
   course: CourseNode;
@@ -65,28 +66,10 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
         <div>
           {course.sections &&
             course.sections.map((section, sectionIndex) => (
-              <Box component="section" key={sectionIndex}>
-                Section {sectionIndex + 1}
-                <div>
-                  {section.meetings.map((meeting, meetingIndex) => (
-                    <div key={meetingIndex}>
-                      {Object.entries(meeting.times).map(
-                        ([day, meetingTimes]) => (
-                          <div key={day}>
-                            {`${dayToString(parseInt(day))}: ` +
-                              meetingTimes.map(
-                                (time) =>
-                                  `${secondsToTime(
-                                    time.start
-                                  )} - ${secondsToTime(time.end)}`
-                              )}
-                          </div>
-                        )
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </Box>
+              <SectionItem
+                section={section}
+                sectionIndex={sectionIndex}
+              ></SectionItem>
             ))}
         </div>
       </AccordionDetails>

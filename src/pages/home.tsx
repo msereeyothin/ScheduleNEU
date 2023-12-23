@@ -21,6 +21,14 @@ function Home() {
   };
   return (
     <SidebarContainer>
+      <div>
+        <AddCourseModal
+          termId=""
+          courseList={courseList}
+          handleAdd={handleAddCourse}
+          handleRemove={handleRemoveCourse}
+        ></AddCourseModal>
+      </div>
       {courseList.map((course) => {
         return (
           <CourseDropdown
@@ -31,14 +39,6 @@ function Home() {
           ></CourseDropdown>
         );
       })}
-      <div>
-        <AddCourseModal
-          termId=""
-          courseList={courseList}
-          handleAdd={handleAddCourse}
-          handleRemove={handleRemoveCourse}
-        ></AddCourseModal>
-      </div>
     </SidebarContainer>
   );
 }
