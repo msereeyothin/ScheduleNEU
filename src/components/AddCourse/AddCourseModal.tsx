@@ -6,6 +6,8 @@ import { CourseNode } from "../../common/types";
 import { useSearchCourses } from "../../hooks/useSearchCourses";
 import CourseView from "../Course/CourseView";
 import { alreadyExists } from "../../common/utils";
+import Searchbar from "../Searchbar/Searchbar";
+
 
 interface AddCourseModalProps {
   termId: string;
@@ -39,6 +41,11 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleSearch = (searchQuery: string) => {
+    setSearchQuery(searchQuery);
+  };
+
+
 
   const { courses, error, isLoading } = useSearchCourses("cs2", "202430"); //placeholder query
 
@@ -57,6 +64,7 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
+        <Searchbar onSearch={handleSearch} />
           {courses &&
             courses.map((course: CourseNode) => (
               <CourseView
