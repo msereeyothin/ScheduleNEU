@@ -6,8 +6,7 @@ import { CourseNode } from "../../common/types";
 import { useSearchCourses } from "../../hooks/useSearchCourses";
 import CourseView from "../Course/CourseView";
 import { alreadyExists } from "../../common/utils";
-import Searchbar from "../Searchbar/Searchbar";
-
+import SearchCoursesInput from "./SearchCoursesInput";
 
 interface AddCourseModalProps {
   termId: string;
@@ -37,25 +36,15 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
   handleRemove,
 }) => {
   const [curCoursesList, setcurCoursesList] = React.useState(courseList);
-  const [searchQuery, setSearchQuery] = React.useState(""); // implement
+  const [searchQuery, setSearchQuery] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handleSearch = (searchQuery: string) => {
-    setSearchQuery(searchQuery);
+  const handleClose = () => {
+    setOpen(false);
+    setSearchQuery("");
   };
 
-
-
-  const { courses, error, isLoading } = useSearchCourses("cs2", "202430"); //placeholder query
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Trouble finding classes!</div>;
-  }
+  const { courses, error, isLoading } = useSearchCourses(searchQuery, "202430"); // Spring 2024
 
   return (
     <div>
@@ -64,7 +53,11 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-        <Searchbar onSearch={handleSearch} />
+          <SearchCoursesInput
+            setSearchQuery={setSearchQuery}
+          ></SearchCoursesInput>
+          {isLoading && <div>Loading...</div>}
+          {error && <div>Trouble finding classes!</div>}
           {courses &&
             courses.map((course: CourseNode) => (
               <CourseView

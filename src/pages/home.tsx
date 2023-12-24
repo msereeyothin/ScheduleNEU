@@ -4,7 +4,6 @@ import { CourseNode } from "../common/types";
 import CourseDropdown from "../components/Course/CourseDropdown";
 import SidebarContainer from "../components/Sidebar/SidebarContainer";
 import { alreadyExists } from "../common/utils";
-import CenterContainer from "../components/Center/CenterContainer";
 
 function Home() {
   const [courseList, setCourseList] = React.useState<CourseNode[]>([]);
@@ -21,7 +20,7 @@ function Home() {
     console.log(courseList);
   };
   return (
-    <div style ={{ display: "flex" }}>
+    <div style={{ display: "flex" }}>
       <SidebarContainer>
         <div>
           <AddCourseModal
@@ -42,9 +41,6 @@ function Home() {
           );
         })}
       </SidebarContainer>
-      <CenterContainer>
-        NUSchedule
-      </CenterContainer>
     </div>
   );
 }
