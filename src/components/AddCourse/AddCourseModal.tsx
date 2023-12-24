@@ -48,9 +48,10 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained">
+       <Button style={{position: "fixed", top: "13px", left: "115px" }} onClick={handleOpen} variant="contained">
         Add Course
       </Button>
+
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <SearchCoursesInput
@@ -60,7 +61,7 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
           {error && <div>Trouble finding classes!</div>}
           {courses &&
             courses.map((course: CourseNode) => (
-              <CourseView
+              <CourseView 
                 courseNode={course}
                 alreadyExists={alreadyExists(course, curCoursesList)}
                 handleAdd={handleAdd}

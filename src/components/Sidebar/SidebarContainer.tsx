@@ -11,7 +11,7 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({ children }) => {
       component="aside"
       className="w-1/4 bg-red-400 p-3 fixed top-0 left-0 bottom-0 flex flex-col items-center justify-between overflow-auto"
     >
-      <div>{children}</div>
+      <div style={{position: "fixed", top: "60px"}} >{children}</div>
     </Box>
   );
 };
