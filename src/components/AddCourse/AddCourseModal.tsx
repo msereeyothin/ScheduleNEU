@@ -4,15 +4,12 @@ import React from "react";
 import { Button } from "@mui/material";
 import { CourseNode } from "../../common/types";
 import { useSearchCourses } from "../../hooks/useSearchCourses";
-import CourseView from "../Course/CourseView";
-import { alreadyExists } from "../../common/utils";
 import SearchCoursesInput from "./SearchCoursesInput";
+import CourseDropdown from "../Course/CourseDropdown";
 
 interface AddCourseModalProps {
-  termId: string;
   courseList: CourseNode[];
-  handleAdd: (course: CourseNode) => void;
-  handleRemove: (course: CourseNode) => void;
+  setCourseList: React.Dispatch<React.SetStateAction<CourseNode[]>>;
 }
 
 const style = {
@@ -20,7 +17,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "30%",
   maxHeight: "80vh",
   overflow: "auto",
   bgcolor: "background.paper",
@@ -30,12 +27,9 @@ const style = {
 };
 
 const AddCourseModal: React.FC<AddCourseModalProps> = ({
-  termId,
   courseList,
-  handleAdd,
-  handleRemove,
+  setCourseList,
 }) => {
-  const [curCoursesList, setcurCoursesList] = React.useState(courseList);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -44,11 +38,12 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
     setSearchQuery("");
   };
 
-  const { courses, error, isLoading } = useSearchCourses(searchQuery, "202430"); // Spring 2024
+  const { courses, error, isLoading } = useSearchCourses(searchQuery, "202430");
 
   return (
     <div>
-       <Button style={{position: "fixed", top: "13px", left: "115px" }} onClick={handleOpen} variant="contained">
+      <div className="relative top"></div>
+      <Button onClick={handleOpen} variant="contained">
         Add Course
       </Button>
 
@@ -61,12 +56,11 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
           {error && <div>Trouble finding classes!</div>}
           {courses &&
             courses.map((course: CourseNode) => (
-              <CourseView 
-                courseNode={course}
-                alreadyExists={alreadyExists(course, curCoursesList)}
-                handleAdd={handleAdd}
-                handleRemove={handleRemove}
-              ></CourseView>
+              <CourseDropdown
+                courseList={courseList}
+                course={course}
+                setCourseList={setCourseList}
+              ></CourseDropdown>
             ))}
         </Box>
       </Modal>

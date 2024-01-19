@@ -1,18 +1,34 @@
-import { Box } from "@mui/material";
+import { Box, Drawer } from "@mui/material";
 import { ReactNode } from "react";
+import { useTheme } from "@mui/material/styles";
 
 interface SidebarContainerProps {
   children: ReactNode;
 }
 
 const SidebarContainer: React.FC<SidebarContainerProps> = ({ children }) => {
+  const theme = useTheme();
   return (
-    <Box
-      component="aside"
-      className="w-1/4 bg-red-400 p-3 fixed top-0 left-0 bottom-0 flex flex-col items-center justify-between overflow-auto"
+    <Drawer
+      variant="permanent"
+      anchor="left"
     >
-      <div style={{position: "fixed", top: "60px"}} >{children}</div>
-    </Box>
+      <Box
+        sx={{
+          padding: 3,
+          gap: "10px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          overflow: "auto",
+          height: "100%",
+          width: '25vw',
+          backgroundColor: theme.palette.background.default,
+        }}
+      >
+        {children}
+      </Box>
+    </Drawer>
   );
 };
 

@@ -3,45 +3,33 @@ import React from "react";
 import { CourseNode } from "../common/types";
 import CourseDropdown from "../components/Course/CourseDropdown";
 import SidebarContainer from "../components/Sidebar/SidebarContainer";
-import { alreadyExists } from "../common/utils";
+import { Box, Container, Drawer, Typography } from "@mui/material";
 
 function Home() {
   const [courseList, setCourseList] = React.useState<CourseNode[]>([]);
 
-  const handleAddCourse = (course: CourseNode) => {
-    setCourseList((prevCourseList) => [...prevCourseList, course]);
-    console.log(courseList);
-  };
-
-  const handleRemoveCourse = (course: CourseNode) => {
-    setCourseList((prevCourseList: CourseNode[]) =>
-      prevCourseList.filter((c: CourseNode) => c.classId !== course.classId)
-    );
-    console.log(courseList);
-  };
   return (
-    <div style={{ display: "flex" }}>
+    <Box>
       <SidebarContainer>
-        <div>
-          <AddCourseModal
-            termId=""
-            courseList={courseList}
-            handleAdd={handleAddCourse}
-            handleRemove={handleRemoveCourse}
-          ></AddCourseModal>
-        </div>
         {courseList.map((course) => {
+          console.log(course);
           return (
             <CourseDropdown
+              courseList={courseList}
               course={course}
-              alreadyExists={alreadyExists(course, courseList)}
-              handleAdd={handleAddCourse}
-              handleRemove={handleRemoveCourse}
+              setCourseList={setCourseList}
             ></CourseDropdown>
           );
         })}
+        <AddCourseModal
+          courseList={courseList}
+          setCourseList={setCourseList}
+        ></AddCourseModal>
       </SidebarContainer>
-    </div>
+      <Box style={{ marginLeft: "25vw" }}>
+        <div>Scheduling Area</div>
+      </Box>
+    </Box>
   );
 }
 

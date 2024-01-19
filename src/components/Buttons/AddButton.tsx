@@ -4,17 +4,24 @@ import AddIcon from "@mui/icons-material/Add";
 import { CourseNode } from "../../common/types";
 
 interface AddButtonProps {
-  handleClick: (course: CourseNode) => void;
+  courseList: CourseNode[];
   course: CourseNode;
+  setCourseList: React.Dispatch<React.SetStateAction<CourseNode[]>>;
 }
 
-const AddButton: React.FC<AddButtonProps> = ({ handleClick, course }) => {
+const AddButton: React.FC<AddButtonProps> = ({
+  courseList,
+  course,
+  setCourseList,
+}) => {
   return (
     <Fab
       size="small"
       color="primary"
       aria-label="add"
-      onClick={() => handleClick(course)}
+      onClick={() => {
+        setCourseList((prevCourseList) => [...prevCourseList, course]);
+      }}
     >
       <AddIcon />
     </Fab>
