@@ -1,20 +1,22 @@
 import AddCourseModal from "../components/AddCourse/AddCourseModal";
 import React from "react";
-import { CourseNode } from "../common/types";
+import { CourseNode, SingleMeeting } from "../common/types";
 import CourseDropdown from "../components/Course/CourseDropdown";
 import SidebarContainer from "../components/Sidebar/SidebarContainer";
-import { Box, Container, Drawer, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Schedule from "../components/Schedule/Schedule";
 
 function Home() {
   const [courseList, setCourseList] = React.useState<CourseNode[]>([]);
+  const [singleMeetingList, setSingleMeetingList] = React.useState<SingleMeeting[]>([]);
 
   return (
     <Box>
       <SidebarContainer>
         {courseList.map((course) => {
-          console.log(course);
           return (
             <CourseDropdown
+              setSingleMeetings={setSingleMeetingList}
               courseList={courseList}
               course={course}
               setCourseList={setCourseList}
@@ -27,7 +29,7 @@ function Home() {
         ></AddCourseModal>
       </SidebarContainer>
       <Box style={{ marginLeft: "25vw" }}>
-        <div>Scheduling Area</div>
+        <Schedule singleMeetings={singleMeetingList}></Schedule>
       </Box>
     </Box>
   );

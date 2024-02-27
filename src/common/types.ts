@@ -1,4 +1,4 @@
-interface MeetingTime {
+export interface MeetingTime {
   end: number;
   start: number;
 }
@@ -13,6 +13,7 @@ export interface Meeting {
 
 export interface Section {
   meetings: Meeting[];
+  campus: string;
 }
 
 export interface CourseNode {
@@ -20,6 +21,11 @@ export interface CourseNode {
   subject: string;
   classId: string;
   sections: Section[];
+}
+
+export interface SingleMeeting {
+  name: string;
+  meetings: Meeting[];
 }
 
 export enum DayOfWeek {

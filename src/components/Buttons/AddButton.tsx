@@ -4,13 +4,11 @@ import AddIcon from "@mui/icons-material/Add";
 import { CourseNode } from "../../common/types";
 
 interface AddButtonProps {
-  courseList: CourseNode[];
   course: CourseNode;
   setCourseList: React.Dispatch<React.SetStateAction<CourseNode[]>>;
 }
 
 const AddButton: React.FC<AddButtonProps> = ({
-  courseList,
   course,
   setCourseList,
 }) => {

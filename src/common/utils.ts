@@ -1,4 +1,4 @@
-import { CourseNode } from "./types";
+import { CourseNode, Meeting, SingleMeeting } from "./types";
 
 export function termIdToString(term: string) {
   const semester = term.slice(-2);
@@ -27,4 +27,35 @@ export function alreadyExists(course: CourseNode, courseList: CourseNode[]) {
 
 export function secondsToTime(seconds: number) {
   return new Date(seconds * 1000).toISOString().slice(11, 16);
+}
+
+export function singleMeetingsToEvent(
+  singleMeetings: SingleMeeting[],
+) {
+  const events: any[] = [];
+  singleMeetings.forEach((singleMeeting) => {
+    singleMeeting.meetings.forEach((meeting) => {
+      Object.entries(meeting.times).forEach(([day, meetingTimes]) => {
+        let start;
+        let end;
+        meetingTimes.map((time) => {
+          start = `${secondsToTime(time.start)}`;
+          end = `${secondsToTime(time.end)}`;
+        });
+        events.push({
+          title: singleMeeting.name,
+          start: `2024-01-0${day}T${start}:00`,
+          end: `2024-01-0${day}T${end}:00`,
+          backgroundColor: "lightblue",
+        });
+      });
+    });
+  });
+
+  console.log(events)
+  return events;
+}
+
+export function meetingToSingleMeeting(name: string, meetings: Meeting[]) {
+  return { name, meetings } as SingleMeeting;
 }

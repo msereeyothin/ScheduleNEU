@@ -46,7 +46,6 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
       <Button onClick={handleOpen} variant="contained">
         Add Course
       </Button>
-
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <SearchCoursesInput
@@ -57,6 +56,7 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
           {courses &&
             courses.map((course: CourseNode) => (
               <CourseDropdown
+                setSingleMeetings={() => {}}
                 courseList={courseList}
                 course={course}
                 setCourseList={setCourseList}

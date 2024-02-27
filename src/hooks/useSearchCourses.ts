@@ -17,10 +17,10 @@ export function useSearchCourses(
         }`,
     async () => await SearchAPI.searchCourses(searchQuery.trim(), termId)
   );
-
   return {
     courses: data ? data : [],
     error: error,
     isLoading: isLoading,
   };
 }
+

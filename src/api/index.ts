@@ -19,7 +19,7 @@ class SearchAPIClient {
         query: `
           {
             search(termId:"${termId}", query: "${searchQuery}", first: ${first}) {
-              nodes { ... on ClassOccurrence { name subject classId sections { meetings }
+              nodes { ... on ClassOccurrence { name subject classId sections { meetings campus }
               }
             }
           }

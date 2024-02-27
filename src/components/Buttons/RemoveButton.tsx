@@ -1,28 +1,43 @@
 import React from "react";
 import Fab from "@mui/material/Fab";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { CourseNode } from "../../common/types";
+import { CourseNode, SingleMeeting } from "../../common/types";
 
 interface RemoveButtonProps {
-  courseList: CourseNode[];
   course: CourseNode;
   setCourseList: React.Dispatch<React.SetStateAction<CourseNode[]>>;
+  setSingleMeetings: React.Dispatch<React.SetStateAction<SingleMeeting[]>>;
 }
 
 const RemoveButton: React.FC<RemoveButtonProps> = ({
-  courseList,
   course,
   setCourseList,
+  setSingleMeetings,
 }) => {
+  const removeCourse = () => {
+    setCourseList((prevCourseList: CourseNode[]) =>
+      prevCourseList.filter((c: CourseNode) => c.name !== course.name)
+    );
+  };
+  // Remove all single meetings under this course.
+  const updateSingleMeetings = () => {
+    setSingleMeetings((prevSingleMeetings) => {
+      const newSingleMeetings = [...prevSingleMeetings];
+      const filteredSingleMeetings = newSingleMeetings.filter(
+        (singleMeeting) => singleMeeting.name !== course.name
+      );
+      return filteredSingleMeetings;
+    });
+  };
+
   return (
     <Fab
       size="small"
       color="primary"
       aria-label="add"
       onClick={() => {
-        setCourseList((prevCourseList: CourseNode[]) =>
-          prevCourseList.filter((c: CourseNode) => c.classId !== course.classId)
-        );
+        removeCourse();
+        updateSingleMeetings();
       }}
     >
       <DeleteIcon />
