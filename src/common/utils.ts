@@ -29,7 +29,10 @@ export function secondsToTime(seconds: number) {
   return new Date(seconds * 1000).toISOString().slice(11, 16);
 }
 
-export function singleMeetingsToEvent(singleMeetings: SingleMeeting[], backgroundColor = "") {
+export function singleMeetingsToEvent(
+  singleMeetings: SingleMeeting[],
+  backgroundColor = ""
+) {
   const events: any[] = [];
   singleMeetings.forEach((singleMeeting) => {
     singleMeeting.meetings.forEach((meeting) => {

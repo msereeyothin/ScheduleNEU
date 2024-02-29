@@ -3,10 +3,7 @@ import { useState } from "react";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { dayToString, SingleMeeting } from "../../common/types";
-import {
-  meetingToSingleMeeting,
-  secondsToTime,
-} from "../../common/utils";
+import { meetingToSingleMeeting, secondsToTime } from "../../common/utils";
 
 interface SectionItemProps {
   section: Section;

@@ -35,7 +35,10 @@ function Home() {
         ></AddCourseModal>
       </SidebarContainer>
       <Box style={{ marginLeft: "25vw" }}>
-        <Schedule singleMeetings={singleMeetingList} hoverSingleMeeting={hoverSingleMeeting}></Schedule>
+        <Schedule
+          singleMeetings={singleMeetingList}
+          hoverSingleMeeting={hoverSingleMeeting}
+        ></Schedule>
       </Box>
     </Box>
   );
