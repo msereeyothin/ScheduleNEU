@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { CourseNode, Section } from "../../common/types";
+import { CourseNode } from "../../common/types";
 import { courseNodeToString, meetingToSingleMeeting } from "../../common/utils";
 import { Box } from "@mui/material";
 import AddButton from "../Buttons/AddButton";
@@ -15,6 +15,7 @@ interface CourseDropDownProps {
   course: CourseNode;
   courseList: CourseNode[];
   setSingleMeetings: React.Dispatch<React.SetStateAction<SingleMeeting[]>>;
+  setHoverSingleMeeting: React.Dispatch<React.SetStateAction<SingleMeeting[]>>;
   setCourseList: React.Dispatch<React.SetStateAction<CourseNode[]>>;
 }
 
@@ -22,6 +23,7 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
   courseList,
   course,
   setSingleMeetings,
+  setHoverSingleMeeting,
   setCourseList,
 }) => {
   const [expanded, setExpanded] = useState(false);
@@ -123,7 +125,9 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
                   isSelected={selectedSectionIndex === sectionIndex}
                   onClick={() => handleSectionClick(sectionIndex)}
                   section={section}
+                  name={course.name}
                   sectionIndex={sectionIndex}
+                  setSingleHoverMeeting={setHoverSingleMeeting}
                 ></SectionItem>
               ))}
           </Box>

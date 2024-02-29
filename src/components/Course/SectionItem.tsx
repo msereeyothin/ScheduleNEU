@@ -2,66 +2,96 @@ import { Section } from "../../common/types";
 import { useState } from "react";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { dayToString } from "../../common/types";
-import { secondsToTime } from "../../common/utils";
+import { dayToString, SingleMeeting } from "../../common/types";
+import {
+  meetingToSingleMeeting,
+  secondsToTime,
+} from "../../common/utils";
 
 interface SectionItemProps {
   section: Section;
+  name: string;
   sectionIndex: number;
   isSelected: boolean;
   onClick: () => void;
+  setSingleHoverMeeting: React.Dispatch<React.SetStateAction<SingleMeeting[]>>;
 }
 
-const SectionItem: React.FC<SectionItemProps> = ({ section, sectionIndex, isSelected, onClick }) => {
+const SectionItem: React.FC<SectionItemProps> = ({
+  section,
+  name,
+  sectionIndex,
+  isSelected,
+  onClick,
+  setSingleHoverMeeting,
+}) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
   };
+  const handleOnHover = (section: Section) => {
+    setSingleHoverMeeting([meetingToSingleMeeting(name, section.meetings)]);
+  };
+  const handleMouseLeave = () => {
+    setSingleHoverMeeting([]);
+  };
+
   return (
-    <Accordion
-      expanded={expanded}
-      sx={{
-        "&:hover": {
-          backgroundColor: "lightblue", // Change color on hover
-        },
-        ...(isSelected && {
-          backgroundColor: "lightblue"
-        })
+    <div
+      onMouseOver={() => {
+        handleOnHover(section);
       }}
+      onMouseLeave={handleMouseLeave}
     >
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon onClick={toggleExpanded} />}
-        onClick={onClick}
+      <Accordion
+        expanded={expanded}
+        sx={{
+          "&:hover": {
+            backgroundColor: "lightblue", // Change color on hover
+          },
+          ...(isSelected && {
+            backgroundColor: "lightblue", // Stay highlighted on select
+          }),
+        }}
       >
-        Section {sectionIndex + 1}
-      </AccordionSummary>
-      <AccordionDetails>
-        <div>
-          {section.meetings.map((meeting, meetingIndex) => {
-            if (section.campus === "Online") {
-              return <div>Online</div>;
-            } else {
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon onClick={toggleExpanded} />}
+          onClick={onClick}
+        >
+          Section {sectionIndex + 1}
+        </AccordionSummary>
+        <AccordionDetails>
+          <div>
+            {section.meetings.map((meeting, meetingIndex) => {
               return (
-                <div key={meetingIndex}>
-                  {Object.entries(meeting.times).map(([day, meetingTimes]) => (
-                    <div key={day}>
-                      {`${dayToString(parseInt(day))}: ` +
-                        meetingTimes.map(
-                          (time) =>
-                            `${secondsToTime(time.start)} - ${secondsToTime(
-                              time.end
-                            )}`
-                        )}
+                <div>
+                  {section.campus === "Online" ? (
+                    <p>Online</p>
+                  ) : (
+                    <div key={meetingIndex}>
+                      {Object.entries(meeting.times).map(
+                        ([day, meetingTimes]) => (
+                          <div key={day}>
+                            {`${dayToString(parseInt(day))}: ` +
+                              meetingTimes.map(
+                                (time) =>
+                                  `${secondsToTime(
+                                    time.start
+                                  )} - ${secondsToTime(time.end)}`
+                              )}
+                          </div>
+                        )
+                      )}
                     </div>
-                  ))}
+                  )}
                 </div>
               );
-            }
-          })}
-        </div>
-      </AccordionDetails>
-    </Accordion>
+            })}
+          </div>
+        </AccordionDetails>
+      </Accordion>
+    </div>
   );
 };
 

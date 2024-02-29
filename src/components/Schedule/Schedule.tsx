@@ -11,13 +11,22 @@ import { SingleMeeting } from "../../common/types";
 
 interface ScheduleProps {
   singleMeetings: SingleMeeting[];
+  hoverSingleMeeting: SingleMeeting[];
 }
 
 const customDayCell = (arg: DayCellContentArg) => {
   return <>{}</>;
 };
 
-const Schedule: React.FC<ScheduleProps> = ({ singleMeetings }) => {
+const Schedule: React.FC<ScheduleProps> = ({
+  singleMeetings,
+  hoverSingleMeeting,
+}) => {
+  const events = [
+    singleMeetingsToEvent(singleMeetings),
+    singleMeetingsToEvent(hoverSingleMeeting, "lightblue"),
+  ].flat(); // Implement logic so that if hoversinglemeeting events are already in singlemeeting events, it doesn't display
+
   return (
     <Box
       sx={{
@@ -30,7 +39,7 @@ const Schedule: React.FC<ScheduleProps> = ({ singleMeetings }) => {
         initialView="timeGridWeek" // Set the view to a time grid week
         headerToolbar={false} // Removes the header and control buttons from the calendar
         weekends={false} // Removes weekends
-        events={singleMeetingsToEvent(singleMeetings)}
+        events={events}
         eventContent={renderEventContent}
         allDaySlot={false}
         slotMinTime={"08:00:00"}

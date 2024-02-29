@@ -29,9 +29,7 @@ export function secondsToTime(seconds: number) {
   return new Date(seconds * 1000).toISOString().slice(11, 16);
 }
 
-export function singleMeetingsToEvent(
-  singleMeetings: SingleMeeting[],
-) {
+export function singleMeetingsToEvent(singleMeetings: SingleMeeting[], backgroundColor = "") {
   const events: any[] = [];
   singleMeetings.forEach((singleMeeting) => {
     singleMeeting.meetings.forEach((meeting) => {
@@ -46,13 +44,11 @@ export function singleMeetingsToEvent(
           title: singleMeeting.name,
           start: `2024-01-0${day}T${start}:00`,
           end: `2024-01-0${day}T${end}:00`,
-          backgroundColor: "lightblue",
+          backgroundColor: backgroundColor,
         });
       });
     });
   });
-
-  console.log(events)
   return events;
 }
 

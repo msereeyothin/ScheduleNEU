@@ -55,8 +55,9 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
           {error && <div>Trouble finding classes!</div>}
           {courses &&
             courses.map((course: CourseNode) => (
-              <CourseDropdown
+              <CourseDropdown // Change this to a more simple display component
                 setSingleMeetings={() => {}}
+                setHoverSingleMeeting={() => {}}
                 courseList={courseList}
                 course={course}
                 setCourseList={setCourseList}

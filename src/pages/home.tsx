@@ -8,7 +8,12 @@ import Schedule from "../components/Schedule/Schedule";
 
 function Home() {
   const [courseList, setCourseList] = React.useState<CourseNode[]>([]);
-  const [singleMeetingList, setSingleMeetingList] = React.useState<SingleMeeting[]>([]);
+  const [singleMeetingList, setSingleMeetingList] = React.useState<
+    SingleMeeting[]
+  >([]);
+  const [hoverSingleMeeting, setHoverSingleMeeting] = React.useState<
+    SingleMeeting[]
+  >([]);
 
   return (
     <Box>
@@ -17,6 +22,7 @@ function Home() {
           return (
             <CourseDropdown
               setSingleMeetings={setSingleMeetingList}
+              setHoverSingleMeeting={setHoverSingleMeeting}
               courseList={courseList}
               course={course}
               setCourseList={setCourseList}
@@ -29,7 +35,7 @@ function Home() {
         ></AddCourseModal>
       </SidebarContainer>
       <Box style={{ marginLeft: "25vw" }}>
-        <Schedule singleMeetings={singleMeetingList}></Schedule>
+        <Schedule singleMeetings={singleMeetingList} hoverSingleMeeting={hoverSingleMeeting}></Schedule>
       </Box>
     </Box>
   );
