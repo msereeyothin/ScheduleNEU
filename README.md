@@ -1,4 +1,6 @@
-# NuSchedule
+# ScheduleNEU
+
+A scheduling planning alternative with the abilitiy to one-click optimize schedules for Northeastern University students.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
