@@ -1,10 +1,11 @@
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
-import Home from "./pages/home";
 import reportWebVitals from "./reportWebVitals";
 import SchedulePage from "./pages/SchedulePage";
 import { ThemeProvider, createTheme } from "@mui/material";
+import About from "./pages/About";
+import Home from "./pages/Home";
 
 const theme = createTheme({
   palette: {
@@ -63,6 +64,7 @@ const Root = () => (
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/schedule" element={<SchedulePage />}></Route>
+        <Route path="/about" element={<About></About>}></Route>
       </Routes>
     </BrowserRouter>
   </ThemeProvider>
