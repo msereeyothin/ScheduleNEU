@@ -28,12 +28,9 @@ const Schedule: React.FC<ScheduleProps> = ({
   ].flat(); // Implement logic so that if hoversinglemeeting events are already in singlemeeting events, it doesn't display
 
   return (
-    <Box
-      sx={{
-        padding: 3,
-      }}
-    >
+    <Box>
       <FullCalendar
+        height={"40vw"}
         plugins={[timeGridPlugin]}
         dayHeaderFormat={{ weekday: "long" }} // Change the day header to just include the day w/o the date
         initialView="timeGridWeek" // Set the view to a time grid week
