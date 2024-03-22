@@ -28,6 +28,12 @@ export interface SingleMeeting {
   meetings: Meeting[];
 }
 
+export interface plan {
+  name: string;
+  courses: CourseNode[];
+  singleMeetings: SingleMeeting[];
+}
+
 export enum DayOfWeek {
   Monday = 1,
   Tuesday,

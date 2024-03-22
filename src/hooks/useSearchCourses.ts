@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { CourseNode } from "../common/types";
-import { SearchAPI } from "../api";
+import { SearchAPI } from "../api/search.api";
 
 type SearchCoursesReturn = {
   courses?: CourseNode[];
