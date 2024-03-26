@@ -12,26 +12,29 @@ export interface Meeting {
 }
 
 export interface Section {
+  /**
+   * The reason this is a list of Meeting is because if the times
+   * across all meetings aren't the same, they get split into multiple
+   * Meeting objects. There's also a "Final Exam" Meeting, specified by
+   * 'type', but I've already filtered those out.
+   */
   meetings: Meeting[];
+  name: string;
   campus: string;
 }
 
-export interface CourseNode {
+export interface Course {
   name: string;
   subject: string;
   classId: string;
   sections: Section[];
 }
 
-export interface SingleMeeting {
+export interface Plan {
   name: string;
-  meetings: Meeting[];
-}
-
-export interface plan {
-  name: string;
-  courses: CourseNode[];
-  singleMeetings: SingleMeeting[];
+  campus: Campus;
+  courses: Course[];
+  sections: Section[];
 }
 
 export enum DayOfWeek {
@@ -41,6 +44,30 @@ export enum DayOfWeek {
   Thursday,
   Friday,
 }
+
+export type WeekDay =
+  | "Monday"
+  | "Tuesday"
+  | "Wednesday"
+  | "Thursday"
+  | "Friday";
+
+export type Campus =
+  | "Arlington, VA"
+  | "Boston"
+  | "Burlington"
+  | "Charlotte, NC"
+  | "Dedham"
+  | "Miami, FL"
+  | "Nahant"
+  | "Oakland, CA"
+  | "Online"
+  | "Portland, Maine"
+  | "San Francisco, CA"
+  | "Seattle, WA"
+  | "Silicon Valley, CA"
+  | "Toronto, Canada"
+  | "Vancouver, Canada";
 
 export const dayToString = (day: DayOfWeek): string => {
   switch (day) {

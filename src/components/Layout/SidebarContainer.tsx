@@ -13,12 +13,9 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({ children }) => {
       sx={{
         padding: 3,
         gap: "10px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
         overflow: "auto",
-        height: "50vw",
-        width: "25vw",
+        height: "100%",
+        width: "100%",
         backgroundColor: theme.palette.background.default,
       }}
     >

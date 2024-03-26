@@ -1,30 +1,24 @@
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import { Divider, Box } from "@mui/material";
-import { Section } from "../../common/types";
 import * as React from "react";
+import { Box } from "@mui/material";
 import FullCalendar from "@fullcalendar/react";
 import { DayCellContentArg } from "@fullcalendar/core";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import { singleMeetingsToEvent } from "../../common/utils";
-import { SingleMeeting } from "../../common/types";
+import { sectionsToEvents } from "../../common/utils";
+import { Section } from "../../common/types";
 
 interface ScheduleProps {
-  singleMeetings: SingleMeeting[];
-  hoverSingleMeeting: SingleMeeting[];
+  sections: Section[];
+  hoverSections: Section[];
 }
 
 const customDayCell = (arg: DayCellContentArg) => {
   return <>{}</>;
 };
 
-const Schedule: React.FC<ScheduleProps> = ({
-  singleMeetings,
-  hoverSingleMeeting,
-}) => {
+const Schedule: React.FC<ScheduleProps> = ({ sections, hoverSections }) => {
   const events = [
-    singleMeetingsToEvent(singleMeetings),
-    singleMeetingsToEvent(hoverSingleMeeting, "lightblue"),
+    sectionsToEvents(sections),
+    sectionsToEvents(hoverSections, "lightblue"),
   ].flat(); // Implement logic so that if hoversinglemeeting events are already in singlemeeting events, it doesn't display
 
   return (

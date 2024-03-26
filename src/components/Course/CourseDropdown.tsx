@@ -1,35 +1,39 @@
 import React from "react";
 import { useState } from "react";
-import { CourseNode } from "../../common/types";
-import { courseNodeToString, meetingToSingleMeeting } from "../../common/utils";
-import { Box } from "@mui/material";
-import AddButton from "../Buttons/AddButton";
+import { courseNodeToString } from "../../common/utils";
 import RemoveButton from "../Buttons/RemoveButton";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Box,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SectionItem from "./SectionItem";
-import { alreadyExists } from "../../common/utils";
-import { SingleMeeting } from "../../common/types";
+import { Course, Section } from "../../common/types";
 
 interface CourseDropDownProps {
-  course: CourseNode;
-  courseList: CourseNode[];
-  setSingleMeetings: React.Dispatch<React.SetStateAction<SingleMeeting[]>>;
-  setHoverSingleMeeting: React.Dispatch<React.SetStateAction<SingleMeeting[]>>;
-  setCourseList: React.Dispatch<React.SetStateAction<CourseNode[]>>;
+  course: Course;
+  setSections: React.Dispatch<React.SetStateAction<Section[]>>;
+  setHoverSection: React.Dispatch<React.SetStateAction<Section[]>>;
+  setCourseList: React.Dispatch<React.SetStateAction<Course[]>>;
 }
 
+const accordionStyle = {
+  borderRadius: "15px",
+};
+
+/**
+ * This CourseDropdown component works, but it's pretty (too) complex and stuff
+ * should probably be abstracted into a hook or something. But for now it works.
+ */
 const CourseDropdown: React.FC<CourseDropDownProps> = ({
-  courseList,
   course,
-  setSingleMeetings,
-  setHoverSingleMeeting,
+  setSections,
+  setHoverSection,
   setCourseList,
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const [exists, setExists] = useState<boolean>(
-    alreadyExists(course, courseList)
-  );
   const [selectedSectionIndex, setSelectedSectionIndex] = useState<number>(-1);
   let previousSelectedSectionIndex = -1;
 
@@ -37,6 +41,7 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
     setExpanded(!expanded);
   };
 
+  // Adds the clicked section to the list of single meetings
   const handleSectionClick = (sectionIndex: number) => {
     previousSelectedSectionIndex = selectedSectionIndex;
     setSelectedSectionIndex((prevIndex) => {
@@ -46,39 +51,25 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
     });
   };
 
+  // Updates the course that is highlighted when clicked
   const updateSelectedSections = (sectionIndex: number) => {
-    setSingleMeetings((prevSingleMeetings) => {
-      let updatedSections = [...prevSingleMeetings];
+    setSections((prevSections) => {
+      let updatedSections = [...prevSections];
       if (sectionIndex !== -1) {
-        updatedSections.push(
-          meetingToSingleMeeting(
-            course.name,
-            course.sections[sectionIndex].meetings
-          )
-        );
+        updatedSections.push(course.sections[sectionIndex]);
         if (previousSelectedSectionIndex !== -1) {
           updatedSections = updatedSections.filter(
-            (s: SingleMeeting) =>
-              JSON.stringify(s) !==
-              JSON.stringify(
-                meetingToSingleMeeting(
-                  course.name,
-                  course.sections[previousSelectedSectionIndex].meetings
-                )
-              )
+            (prevSection) =>
+              JSON.stringify(prevSection) !==
+              JSON.stringify(course.sections[previousSelectedSectionIndex])
           );
         }
       } else {
         if (previousSelectedSectionIndex !== -1) {
           updatedSections = updatedSections.filter(
-            (s: SingleMeeting) =>
-              JSON.stringify(s) !==
-              JSON.stringify(
-                meetingToSingleMeeting(
-                  course.name,
-                  course.sections[previousSelectedSectionIndex].meetings
-                )
-              )
+            (prevSection) =>
+              JSON.stringify(prevSection) !==
+              JSON.stringify(course.sections[previousSelectedSectionIndex])
           );
         }
       }
@@ -86,36 +77,58 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
     });
   };
 
-  React.useEffect(() => {
-    const courseExists = alreadyExists(course, courseList);
-    setExists(courseExists);
-  }, [course, courseList]);
+  // Remove this course from the list
+  const removeCourse = () => {
+    setCourseList((prevCourseList: Course[]) =>
+      prevCourseList.filter((c: Course) => c.name !== course.name)
+    );
+  };
+
+  // Remove all sections under this course
+  const removeCourseSections = () => {
+    setSections((prevSections) => {
+      const updatedSections = [...prevSections];
+      const filteredSections = updatedSections.filter(
+        (section) => section.name !== course.name
+      );
+      return filteredSections;
+    });
+  };
 
   return (
-    <Box>
-      <Accordion expanded={expanded}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon onClick={toggleExpanded} />}
-          aria-controls="panel1a-content"
-        >
-          <span style={{ fontWeight: "bold" }}>
-            {courseNodeToString(course)}
-          </span>
-          : {course.name}
-          <div className="ml-auto pr-4">
-            {exists ? (
-              <AddButton
-                course={course}
-                setCourseList={setCourseList}
-              ></AddButton>
-            ) : (
+    <Box sx={{ width: "100%", paddingBottom: 1 }}>
+      <Accordion expanded={expanded} square={true} sx={accordionStyle}>
+        <AccordionSummary>
+          <Box sx={{ width: "100%" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <span style={{ fontWeight: "bold" }}>
+                  {courseNodeToString(course)}
+                </span>
+                <div>{course.name}</div>
+              </div>
               <RemoveButton
-                setSingleMeetings={setSingleMeetings}
-                course={course}
-                setCourseList={setCourseList}
+                onClick={() => {
+                  removeCourse();
+                  removeCourseSections();
+                }}
               ></RemoveButton>
-            )}
-          </div>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <ExpandMoreIcon onClick={toggleExpanded} />
+            </Box>
+          </Box>
         </AccordionSummary>
         <AccordionDetails>
           <Box>
@@ -127,7 +140,7 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
                   section={section}
                   name={course.name}
                   sectionIndex={sectionIndex}
-                  setSingleHoverMeeting={setHoverSingleMeeting}
+                  setHoverSection={setHoverSection}
                 ></SectionItem>
               ))}
           </Box>

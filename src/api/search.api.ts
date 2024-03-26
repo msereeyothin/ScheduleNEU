@@ -1,5 +1,5 @@
 import Axios, { AxiosInstance } from "axios";
-import { CourseNode } from "../common/types";
+import { Course } from "../common/types";
 
 class SearchAPIClient {
   private axios: AxiosInstance;
@@ -11,7 +11,7 @@ class SearchAPIClient {
     searchQuery: string,
     termId: string,
     first = 50
-  ): Promise<CourseNode[]> => {
+  ): Promise<Course[]> => {
     const res = await this.axios({
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -29,7 +29,7 @@ class SearchAPIClient {
     const coursesData = await res.data;
     const nodes = coursesData?.data?.search?.nodes ?? [];
 
-    const courses = nodes.map((node: CourseNode) => {
+    const courses = nodes.map((node: Course) => {
       const { name, subject, classId, sections } = node;
       return {
         name,
@@ -37,7 +37,7 @@ class SearchAPIClient {
         classId,
         sections,
       };
-    }) as CourseNode[];
+    }) as Course[];
 
     return courses;
   };

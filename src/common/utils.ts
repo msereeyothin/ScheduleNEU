@@ -1,4 +1,4 @@
-import { CourseNode, Meeting, SingleMeeting } from "./types";
+import { Course, Meeting, Section } from "./types";
 
 export function termIdToString(term: string) {
   const semester = term.slice(-2);
@@ -17,11 +17,11 @@ export function termIdToString(term: string) {
   }
 }
 
-export function courseNodeToString(course: CourseNode) {
+export function courseNodeToString(course: Course) {
   return `${course.subject}${course.classId}`;
 }
 
-export function alreadyExists(course: CourseNode, courseList: CourseNode[]) {
+export function alreadyExists(course: Course, courseList: Course[]) {
   return !courseList.includes(course);
 }
 
@@ -29,13 +29,10 @@ export function secondsToTime(seconds: number) {
   return new Date(seconds * 1000).toISOString().slice(11, 16);
 }
 
-export function singleMeetingsToEvent(
-  singleMeetings: SingleMeeting[],
-  backgroundColor = ""
-) {
+export function sectionsToEvents(sections: Section[], backgroundColor = "") {
   const events: any[] = [];
-  singleMeetings.forEach((singleMeeting) => {
-    singleMeeting.meetings.forEach((meeting) => {
+  sections.forEach((section) => {
+    section.meetings.forEach((meeting) => {
       Object.entries(meeting.times).forEach(([day, meetingTimes]) => {
         let start;
         let end;
@@ -44,7 +41,7 @@ export function singleMeetingsToEvent(
           end = `${secondsToTime(time.end)}`;
         });
         events.push({
-          title: singleMeeting.name,
+          title: section.name,
           start: `2024-01-0${day}T${start}:00`,
           end: `2024-01-0${day}T${end}:00`,
           backgroundColor: backgroundColor,
@@ -53,8 +50,4 @@ export function singleMeetingsToEvent(
     });
   });
   return events;
-}
-
-export function meetingToSingleMeeting(name: string, meetings: Meeting[]) {
-  return { name, meetings } as SingleMeeting;
 }

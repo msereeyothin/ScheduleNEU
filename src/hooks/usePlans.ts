@@ -1,44 +1,49 @@
 import { useState, useMemo, useEffect } from "react";
-import { CourseNode, SingleMeeting, plan } from "../common/types";
+import { Course, Plan, Section } from "../common/types";
+import { addPlan } from "../api/localStorage.api";
 
 function usePlans() {
-  const [plans, setPlans] = useState<plan[]>([
+  const [plans, setPlans] = useState<Plan[]>([
     {
       name: "Plan A",
+      campus: "Boston",
       courses: [],
-      singleMeetings: [],
+      sections: [],
     },
     {
       name: "Plan B",
+      campus: "Online",
       courses: [],
-      singleMeetings: [],
+      sections: [],
     },
   ]);
-  const [plan, setPlan] = useState<plan>(plans[0]);
+  const [plan, setPlan] = useState<Plan>(plans[0]);
 
-  const [courses, setCourses] = useState<CourseNode[]>([]);
-  const [singleMeetings, setSingleMeetings] = useState<SingleMeeting[]>([]);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [sections, setSections] = useState<Section[]>([]);
 
   const memoizedCourses = useMemo(() => courses, [courses]);
-  const memoizedSingleMeetings = useMemo(
-    () => singleMeetings,
-    [singleMeetings]
+  const memoizedSections = useMemo(
+    () => sections,
+    [sections]
   );
 
+  // Update the state of plan if they change
   useEffect(() => {
     if (
       JSON.stringify(plan.courses) !== JSON.stringify(memoizedCourses) ||
-      JSON.stringify(plan.singleMeetings) !==
-        JSON.stringify(memoizedSingleMeetings)
+      JSON.stringify(plan.sections) !==
+        JSON.stringify(memoizedSections)
     ) {
       setPlan((prevPlan) => ({
         ...prevPlan,
         courses: memoizedCourses,
-        singleMeetings: memoizedSingleMeetings,
+        singleMeetings: memoizedSections,
       }));
     }
-  }, [memoizedCourses, memoizedSingleMeetings]);
+  }, [memoizedCourses, memoizedSections]);
 
+  // Update the list of plans when a signle plan changes
   useEffect(() => {
     setPlans((prevPlans) => {
       const newPlans = [...prevPlans];
@@ -50,19 +55,25 @@ function usePlans() {
     });
   }, [plan]);
 
+  // Update the courses and singlemeetings when the plans change
   useEffect(() => {
     setCourses(plan.courses);
-    setSingleMeetings(plan.singleMeetings);
+    setSections(plan.sections);
   }, [plan]);
+
+  const addPlan = (newPlan: Plan) => {
+    setPlans((prevPlans) => [...prevPlans, newPlan]);
+  };
 
   return {
     plans,
     plan,
     setPlan,
+    addPlan,
     courses,
     setCourses,
-    singleMeetings,
-    setSingleMeetings,
+    sections,
+    setSections,
   };
 }
 

@@ -1,89 +1,86 @@
-import AddCourseModal from "../components/AddCourse/AddCourseModal";
+import AddCourseModal from "../components/Course/AddCourse/AddCourseModal";
 import React from "react";
-import { SingleMeeting } from "../common/types";
+import { Section } from "../common/types";
 import CourseDropdown from "../components/Course/CourseDropdown";
-import SidebarContainer from "../components/Sidebar/SidebarContainer";
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import SidebarContainer from "../components/Layout/SidebarContainer";
+import { Box, Typography } from "@mui/material";
 import Schedule from "../components/Schedule/Schedule";
-import TopBar from "../components/TopBar/TopBar";
-import { SelectChangeEvent } from "@mui/material";
 import usePlans from "../hooks/usePlans";
+import AddPlanModal from "../components/Plan/AddPlanModal";
+import SelectPlan from "../components/Plan/SelectPlan";
 
 function Home() {
   const {
     plans,
     plan,
     setPlan,
+    addPlan,
     courses,
     setCourses,
-    singleMeetings,
-    setSingleMeetings,
+    sections,
+    setSections,
   } = usePlans();
-  const [hoverSingleMeeting, setHoverSingleMeeting] = React.useState<
-    SingleMeeting[]
-  >([]);
-
-  const handlePlanChange = (event: SelectChangeEvent) => {
-    let planName = event.target.value as string;
-    let curPlan = plans.find((plan) => plan.name === planName);
-    if (curPlan) {
-      setPlan(curPlan);
-    } else {
-      console.error(`Plan "${planName}" not found.`);
-    }
-  };
+  const [hoverSection, setHoverSection] = React.useState<Section[]>([]);
 
   return (
-    <Box>
-      <TopBar></TopBar>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <SidebarContainer>
+    <Box sx={{ display: "flex", flexDirection: "row", height: "50vw" }}>
+      <SidebarContainer>
+        <Box sx={{ paddingBottom: 2 }}>
+          <Typography variant="h2">{plan.name}</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           {plan.courses.map((course) => {
             return (
               <CourseDropdown
-                setSingleMeetings={setSingleMeetings}
-                setHoverSingleMeeting={setHoverSingleMeeting}
-                courseList={courses}
                 course={course}
+                setSections={setSections}
+                setHoverSection={setHoverSection}
                 setCourseList={setCourses}
               ></CourseDropdown>
             );
           })}
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: 2,
+          }}
+        >
           <AddCourseModal
-            courseList={courses}
-            setCourseList={setCourses}
+            campus={plan.campus}
+            addedCourses={courses}
+            setAddedCourses={setCourses}
           ></AddCourseModal>
-        </SidebarContainer>
-        <Box sx={{ padding: 2 }}>
-          <Typography variant="h3">Plans go here</Typography>
-          <Box>
-            <FormControl fullWidth>
-              <InputLabel>Select Plan</InputLabel>
-              <Select
-                value={plan.name}
-                label="Plan"
-                onChange={handlePlanChange}
-              >
-                {plans.map((plan) => (
-                  <MenuItem value={plan.name}> {plan.name}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+        </Box>
+      </SidebarContainer>
+      <Box sx={{ padding: 2 }}>
+        <Box
+          sx={{
+            width: "40%",
+            display: "flex",
+            direction: "row",
+            paddingBottom: 2,
+            paddingTop: 1,
+          }}
+        >
+          <SelectPlan plan={plan} plans={plans} setPlan={setPlan}></SelectPlan>
+          <Box sx={{ marginLeft: 1 }}>
+            <AddPlanModal addPlan={addPlan}></AddPlanModal>
           </Box>
-
-          <Box sx={{ width: "75vw" }}>
-            <Schedule
-              singleMeetings={singleMeetings}
-              hoverSingleMeeting={hoverSingleMeeting}
-            ></Schedule>
-          </Box>
+        </Box>
+        <Box sx={{ width: "75vw" }}>
+          <Schedule
+            sections={sections}
+            hoverSections={hoverSection}
+          ></Schedule>
         </Box>
       </Box>
     </Box>
