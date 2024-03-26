@@ -18,21 +18,27 @@ export function useSearchCourses(
         }`,
     async () => await SearchAPI.searchCourses(searchQuery.trim(), termId)
   );
-  const courses = data ? data : [];
+  let courses = data ? data : [];
 
-  courses.forEach((course) => {
-    // Filter out sections with wrong campus
-    course.sections = course.sections.filter(
-      (section) => section.campus === campus || section.campus === "Online"
-    );
-    // Filter out final exams
-    course.sections.forEach((section) => {
-      section.meetings = section.meetings.filter(
-        (meeting) => meeting.type !== "Final Exam"
+  // Filter out courses without any sections
+  courses = courses.filter((course) => course.sections);
+
+  if (courses) {
+    courses.forEach((course) => {
+      // Filter out sections with wrong campus
+      course.sections = course.sections.filter(
+        (section) => section.campus === campus || section.campus === "Online"
       );
-      section.name = course.name;
+      // Filter out final exams
+      course.sections.forEach((section) => {
+        section.meetings = section.meetings.filter(
+          (meeting) => meeting.type !== "Final Exam"
+        );
+        section.name = course.name;
+      });
     });
-  });
+  }
+
   return {
     courses,
     error: error,
