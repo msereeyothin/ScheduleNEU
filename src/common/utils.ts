@@ -1,19 +1,19 @@
-import { Course, Meeting, Section } from "./types";
+import { Course, Section } from "./types";
 
 export function termIdToString(term: string) {
   const semester = term.slice(-2);
   const year = term.slice(0, 4);
   switch (semester) {
     case "10":
-      return "Fall " + (Number(year) - 1).toString() + " Semester";
+      return "Fall " + (Number(year) - 1).toString();
     case "30":
-      return "Spring " + year + " Semester";
+      return "Spring " + year;
     case "40":
-      return "Summer 1 " + year + " Semester";
+      return "Summer 1 " + year;
     case "50":
-      return "Summer Full " + year + " Semester";
+      return "Summer Full " + year;
     case "60":
-      return "Summer 2 " + year + " Semester";
+      return "Summer 2 " + year;
   }
 }
 
@@ -51,3 +51,13 @@ export function sectionsToEvents(sections: Section[], backgroundColor = "") {
   });
   return events;
 }
+
+export const termIds = ["2023", "2024"]
+  .map((year) => [
+    `${year}10`,
+    `${year}30`,
+    `${year}40`,
+    `${year}50`,
+    `${year}60`,
+  ])
+  .flat();

@@ -32,6 +32,7 @@ export interface Course {
 
 export interface Plan {
   name: string;
+  term: string;
   campus: Campus;
   courses: Course[];
   sections: Section[];
@@ -68,6 +69,24 @@ export type Campus =
   | "Silicon Valley, CA"
   | "Toronto, Canada"
   | "Vancouver, Canada";
+
+export const campusValues: Campus[] = [
+  "Arlington, VA",
+  "Boston",
+  "Burlington",
+  "Charlotte, NC",
+  "Dedham",
+  "Miami, FL",
+  "Nahant",
+  "Oakland, CA",
+  "Online",
+  "Portland, Maine",
+  "San Francisco, CA",
+  "Seattle, WA",
+  "Silicon Valley, CA",
+  "Toronto, Canada",
+  "Vancouver, Canada",
+];
 
 export const dayToString = (day: DayOfWeek): string => {
   switch (day) {

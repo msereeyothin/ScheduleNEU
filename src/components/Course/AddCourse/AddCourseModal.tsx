@@ -12,12 +12,14 @@ interface AddCourseModalProps {
   addedCourses: Course[];
   setAddedCourses: React.Dispatch<React.SetStateAction<Course[]>>;
   campus: Campus;
+  term: string;
 }
 
 const AddCourseModal: React.FC<AddCourseModalProps> = ({
   addedCourses,
   setAddedCourses,
   campus,
+  term,
 }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -29,7 +31,7 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
   const { courses, error, isLoading } = useSearchCourses(
     searchQuery,
-    "202430",
+    term,
     campus
   );
 

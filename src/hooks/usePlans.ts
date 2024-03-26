@@ -1,18 +1,12 @@
 import { useState, useMemo, useEffect } from "react";
 import { Course, Plan, Section } from "../common/types";
-import { addPlan } from "../api/localStorage.api";
 
 function usePlans() {
   const [plans, setPlans] = useState<Plan[]>([
     {
-      name: "Plan A",
+      name: "Example Plan",
+      term: "202430",
       campus: "Boston",
-      courses: [],
-      sections: [],
-    },
-    {
-      name: "Plan B",
-      campus: "Online",
       courses: [],
       sections: [],
     },
@@ -23,17 +17,13 @@ function usePlans() {
   const [sections, setSections] = useState<Section[]>([]);
 
   const memoizedCourses = useMemo(() => courses, [courses]);
-  const memoizedSections = useMemo(
-    () => sections,
-    [sections]
-  );
+  const memoizedSections = useMemo(() => sections, [sections]);
 
   // Update the state of plan if they change
   useEffect(() => {
     if (
       JSON.stringify(plan.courses) !== JSON.stringify(memoizedCourses) ||
-      JSON.stringify(plan.sections) !==
-        JSON.stringify(memoizedSections)
+      JSON.stringify(plan.sections) !== JSON.stringify(memoizedSections)
     ) {
       setPlan((prevPlan) => ({
         ...prevPlan,
