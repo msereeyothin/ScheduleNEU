@@ -13,10 +13,10 @@ function AddCourseDisplay({
   alreadyAdded: boolean;
   addCourse: (course: Course) => void;
 }) {
-  const [isAdded, setIsAdded] = React.useState(!alreadyAdded);
   const onClick = () => {
-    addCourse(course);
-    setIsAdded((prev) => !prev);
+    if (!alreadyAdded) {
+      addCourse(course);
+    }
   };
   return (
     <Box sx={{ width: "100%", padding: "8px" }}>
@@ -33,7 +33,7 @@ function AddCourseDisplay({
           </span>
           <div>{course.name}</div>
         </div>
-        <AddButton onClick={onClick} disabled={isAdded}></AddButton>
+        <AddButton onClick={onClick} disabled={alreadyAdded}></AddButton>
       </Box>
     </Box>
   );
