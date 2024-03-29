@@ -8,19 +8,19 @@ import DayDisplay from "./DayDisplay";
 
 function WeekDisplay({ section }: { section: Section }) {
 
-  const dayTimePairs = section.meetings.reduce<{ day: number, timeString: string }[]>((acc, meeting) => {
+  const dayTimePairs = section.meetings.reduce<{ day: number, timeString: string }[]>((accumulator, meeting) => {
     Object.entries(meeting.times).forEach(([day, times]) => {
       times.forEach(time => {
         const timeString = `${secondsToTime(time.start)} - ${secondsToTime(time.end)}`;
         const dayInt = parseInt(day);
         const pair = { day: dayInt, timeString };
 
-        if (!acc.some(item => item.day === dayInt && item.timeString === timeString)) {
-          acc.push(pair);
+        if (!accumulator.some(item => item.day === dayInt && item.timeString === timeString)) {
+          accumulator.push(pair);
         }
       });
     });
-    return acc;
+    return accumulator;
   }, []);
 
   // filter unique times regardless of the day, for displaying purposes
