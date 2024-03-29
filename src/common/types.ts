@@ -5,7 +5,7 @@ export interface MeetingTime {
 
 export interface Meeting {
   type: string;
-  times: { [key: string]: MeetingTime[] };
+  times: {[key: string]: MeetingTime[]};
   where: string;
   endDate: number;
   startDate: number;
@@ -38,20 +38,13 @@ export interface Plan {
   sections: Section[];
 }
 
-export enum DayOfWeek {
+export enum WeekDay {
   Monday = 1,
   Tuesday,
   Wednesday,
   Thursday,
   Friday,
 }
-
-export type WeekDay =
-  | "Monday"
-  | "Tuesday"
-  | "Wednesday"
-  | "Thursday"
-  | "Friday";
 
 export type Campus =
   | "Arlington, VA"
@@ -87,20 +80,3 @@ export const campusValues: Campus[] = [
   "Toronto, Canada",
   "Vancouver, Canada",
 ];
-
-export const dayToString = (day: DayOfWeek): string => {
-  switch (day) {
-    case DayOfWeek.Monday:
-      return "Monday";
-    case DayOfWeek.Tuesday:
-      return "Tuesday";
-    case DayOfWeek.Wednesday:
-      return "Wednesday";
-    case DayOfWeek.Thursday:
-      return "Thursday";
-    case DayOfWeek.Friday:
-      return "Friday";
-    default:
-      return "Invalid Day";
-  }
-};
