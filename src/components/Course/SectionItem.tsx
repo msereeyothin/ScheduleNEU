@@ -1,7 +1,5 @@
 import { Section } from "../../common/types";
 import { Box } from "@mui/material";
-import { dayToString } from "../../common/utils";
-import { secondsToTime } from "../../common/utils";
 import WeekDisplay from "./MeetingDisplay/WeekDisplay";
 
 interface SectionItem2Props {
@@ -22,16 +20,16 @@ const SectionItem: React.FC<SectionItem2Props> = ({
   setHoverSection,
 }) => {
   const style = {
-    outline: "solid grey 2px",
+    boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
     "&:hover": {
-      backgroundColor: "lightblue", // Change color on hover
+      backgroundColor: "lightblue",
     },
     ...(isSelected && {
-      backgroundColor: "lightblue", // Stay highlighted on select
+      backgroundColor: "lightblue",
     }),
     borderRadius: "10px",
     marginBottom: "10px",
-    padding: 1,
+    padding: 1.5,
   };
 
   const handleOnHover = (section: Section) => {
@@ -49,8 +47,8 @@ const SectionItem: React.FC<SectionItem2Props> = ({
     >
       <Box sx={style}>
         Section {sectionIndex + 1}: {section.campus}
-        <Box sx={{paddingTop: 1}}>
-        <WeekDisplay section={section}></WeekDisplay>
+        <Box sx={{ paddingTop: 1 }}>
+          <WeekDisplay section={section}></WeekDisplay>
         </Box>
       </Box>
     </div>
