@@ -1,4 +1,5 @@
 import { Course, Section } from "./types";
+import { WeekDay } from "./types";
 
 export function termIdToString(term: string) {
   const semester = term.slice(-2);
@@ -65,3 +66,20 @@ export const termIds = ["2023", "2024"]
 export function generateID() {
   return Math.random().toString(16).slice(2);
 }
+
+export const dayToString = (day: WeekDay): string => {
+  switch (day) {
+    case WeekDay.Monday:
+      return "Monday";
+    case WeekDay.Tuesday:
+      return "Tuesday";
+    case WeekDay.Wednesday:
+      return "Wednesday";
+    case WeekDay.Thursday:
+      return "Thursday";
+    case WeekDay.Friday:
+      return "Friday";
+    default:
+      return "Invalid Day";
+  }
+};
