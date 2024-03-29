@@ -61,7 +61,7 @@ export const termIds = ["2023", "2024"]
     `${year}50`,
     `${year}60`,
   ])
-  .flat();
+.flat();
 
 export const dayToString = (day: WeekDay): string => {
   switch (day) {
@@ -79,3 +79,4 @@ export const dayToString = (day: WeekDay): string => {
       return "Invalid Day";
   }
 };
+

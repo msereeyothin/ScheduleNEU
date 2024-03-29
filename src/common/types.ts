@@ -33,6 +33,7 @@ export interface Course {
 export interface Plan {
   name: string;
   term: string;
+  isEmpty: boolean;
   campus: Campus;
   courses: Course[];
   sections: Section[];

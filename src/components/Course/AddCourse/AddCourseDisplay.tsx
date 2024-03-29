@@ -7,16 +7,16 @@ import AddButton from "../../Buttons/AddButton";
 function AddCourseDisplay({
   course,
   alreadyAdded,
-  setCourseList,
+  addCourse,
 }: {
   course: Course;
   alreadyAdded: boolean;
-  setCourseList: () => void;
+  addCourse: (course: Course) => void;
 }) {
   const [isAdded, setIsAdded] = React.useState(!alreadyAdded);
   const onClick = () => {
+    addCourse(course);
     setIsAdded((prev) => !prev);
-    setCourseList();
   };
   return (
     <Box sx={{ width: "100%", padding: "8px" }}>

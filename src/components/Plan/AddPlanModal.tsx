@@ -38,16 +38,19 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
     setCampus(event.target.value as Campus);
   };
   useEffect(() => {
-    if (term !== "" && campus) {
+    if (name !== "" && term !== "" && campus) {
       setValid(true);
+    } else {
+      setValid(false);
     }
-  }, [term, campus]);
+  }, [name, term, campus]);
 
   const handleAddPlan = () => {
     if (campus) {
       const newPlan = {
         name: name,
         term: term,
+        isEmpty: false,
         campus: campus,
         courses: [],
         sections: [],

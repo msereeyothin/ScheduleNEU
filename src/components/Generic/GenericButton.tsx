@@ -9,20 +9,37 @@ const style = {
 
 type ButtonVariant = "contained" | "outlined" | "text";
 
+type Color =
+  | "inherit"
+  | "primary"
+  | "secondary"
+  | "success"
+  | "error"
+  | "info"
+  | "warning";
+
 function GenericButton({
   children,
   onClick,
   disabled = false,
   variant = "contained",
+  color = "primary",
 }: {
   children?: React.ReactNode;
   onClick: () => void;
   disabled?: boolean;
   variant?: ButtonVariant;
+  color?: Color;
 }) {
   return (
     <>
-      <Button onClick={onClick} sx={style} variant={variant} disabled={disabled}>
+      <Button
+        onClick={onClick}
+        sx={style}
+        variant={variant}
+        disabled={disabled}
+        color={color}
+      >
         {children}
       </Button>
     </>

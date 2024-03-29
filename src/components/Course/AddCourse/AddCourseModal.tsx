@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import React from "react";
 import { Campus, Course } from "../../../common/types";
 import { useSearchCourses } from "../../../hooks/useSearchCourses";
@@ -9,17 +8,17 @@ import AddCourseDisplay from "./AddCourseDisplay";
 import { alreadyExists } from "../../../common/utils";
 
 interface AddCourseModalProps {
-  addedCourses: Course[];
-  setAddedCourses: React.Dispatch<React.SetStateAction<Course[]>>;
   campus: Campus;
   term: string;
+  addCourse: (course: Course) => void;
+  existingCourses: Course[];
 }
 
 const AddCourseModal: React.FC<AddCourseModalProps> = ({
-  addedCourses,
-  setAddedCourses,
   campus,
   term,
+  addCourse,
+  existingCourses,
 }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -35,10 +34,6 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
     campus
   );
 
-  const addCourseToCourses = (course: Course) => {
-    setAddedCourses((prevCourses) => [...prevCourses, course]);
-  };
-
   return (
     <>
       <GenericButton onClick={handleOpen}>Add Course</GenericButton>
@@ -52,8 +47,8 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
           courses.map((course: Course) => (
             <AddCourseDisplay
               course={course}
-              alreadyAdded={alreadyExists(course, addedCourses)}
-              setCourseList={() => addCourseToCourses(course)}
+              alreadyAdded={alreadyExists(course, existingCourses)}
+              addCourse={addCourse}
             ></AddCourseDisplay>
           ))}
       </GenericModal>
