@@ -10,40 +10,41 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SectionItem from "./SectionItem";
-import { Course, Section } from "../../common/types";
+import { Course, Section, Plan } from "../../common/types";
 
 interface CourseDropDownProps {
-  course: Course;
-  setSections: React.Dispatch<React.SetStateAction<Section[]>>;
+  plan: Plan;
   setHoverSection: React.Dispatch<React.SetStateAction<Section[]>>;
-  setCourseList: React.Dispatch<React.SetStateAction<Course[]>>;
+  course: Course;
+  removeCourse: (course: Course) => void;
+  addSection: (section: Section) => void;
+  removeSection: (section: Section) => void;
 }
 
 const accordionStyle = {
   borderRadius: "15px",
 };
 
-/**
- * This CourseDropdown component works, but it's pretty (too) complex and stuff
- * should probably be abstracted into a hook or something. But for now it works.
- */
 const CourseDropdown: React.FC<CourseDropDownProps> = ({
-  course,
-  setSections,
+  plan,
   setHoverSection,
-  setCourseList,
+  course,
+  removeCourse,
+  addSection,
+  removeSection,
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [selectedSectionIndex, setSelectedSectionIndex] = useState<number>(-1);
-  let previousSelectedSectionIndex = -1;
+
+  let prevIndex = -1;
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
   };
 
-  // Adds the clicked section to the list of single meetings
+  // Adds the clicked section to sections
   const handleSectionClick = (sectionIndex: number) => {
-    previousSelectedSectionIndex = selectedSectionIndex;
+    prevIndex = selectedSectionIndex;
     setSelectedSectionIndex((prevIndex) => {
       const newIndex = sectionIndex === prevIndex ? -1 : sectionIndex;
       updateSelectedSections(newIndex);
@@ -53,45 +54,24 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
 
   // Updates the course that is highlighted when clicked
   const updateSelectedSections = (sectionIndex: number) => {
-    setSections((prevSections) => {
-      let updatedSections = [...prevSections];
-      if (sectionIndex !== -1) {
-        updatedSections.push(course.sections[sectionIndex]);
-        if (previousSelectedSectionIndex !== -1) {
-          updatedSections = updatedSections.filter(
-            (prevSection) =>
-              JSON.stringify(prevSection) !==
-              JSON.stringify(course.sections[previousSelectedSectionIndex])
-          );
-        }
-      } else {
-        if (previousSelectedSectionIndex !== -1) {
-          updatedSections = updatedSections.filter(
-            (prevSection) =>
-              JSON.stringify(prevSection) !==
-              JSON.stringify(course.sections[previousSelectedSectionIndex])
-          );
-        }
+    if (sectionIndex !== -1) {
+      addSection(course.sections[sectionIndex]);
+      if (prevIndex !== -1) {
+        removeSection(course.sections[prevIndex]);
       }
-      return updatedSections;
-    });
-  };
-
-  // Remove this course from the list
-  const removeCourse = () => {
-    setCourseList((prevCourseList: Course[]) =>
-      prevCourseList.filter((c: Course) => c.name !== course.name)
-    );
+    } else {
+      if (prevIndex !== -1) {
+        removeSection(course.sections[prevIndex]);
+      }
+    }
   };
 
   // Remove all sections under this course
   const removeCourseSections = () => {
-    setSections((prevSections) => {
-      const updatedSections = [...prevSections];
-      const filteredSections = updatedSections.filter(
-        (section) => section.name !== course.name
-      );
-      return filteredSections;
+    plan.sections.forEach((section) => {
+      if (section.name === course.name) {
+        removeSection(section);
+      }
     });
   };
 
@@ -115,7 +95,7 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
               </div>
               <RemoveButton
                 onClick={() => {
-                  removeCourse();
+                  removeCourse(course);
                   removeCourseSections();
                 }}
               ></RemoveButton>
