@@ -63,19 +63,19 @@ export const termIds = ["2023", "2024"]
   ])
   .flat();
 
-  export const dayToString = (day: WeekDay): string => {
-    switch (day) {
-      case WeekDay.Monday:
-        return "Monday";
-      case WeekDay.Tuesday:
-        return "Tuesday";
-      case WeekDay.Wednesday:
-        return "Wednesday";
-      case WeekDay.Thursday:
-        return "Thursday";
-      case WeekDay.Friday:
-        return "Friday";
-      default:
-        return "Invalid Day";
-    }
-  };
+export const dayToString = (day: WeekDay): string => {
+  switch (day) {
+    case WeekDay.Monday:
+      return "Monday";
+    case WeekDay.Tuesday:
+      return "Tuesday";
+    case WeekDay.Wednesday:
+      return "Wednesday";
+    case WeekDay.Thursday:
+      return "Thursday";
+    case WeekDay.Friday:
+      return "Friday";
+    default:
+      return "Invalid Day";
+  }
+};
