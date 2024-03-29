@@ -12,7 +12,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import { termIds, termIdToString } from "../../common/utils";
+import { termIds, termIdToString, generateID } from "../../common/utils";
 
 interface AddPlanModalProps {
   addPlan: (newPlan: Plan) => void;
@@ -48,6 +48,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
   const handleAddPlan = () => {
     if (campus) {
       const newPlan = {
+        id: generateID(),
         name: name,
         term: term,
         isEmpty: false,

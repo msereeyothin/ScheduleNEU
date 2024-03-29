@@ -31,6 +31,7 @@ export interface Course {
 }
 
 export interface Plan {
+  id: string;
   name: string;
   term: string;
   isEmpty: boolean;

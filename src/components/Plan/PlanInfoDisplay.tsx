@@ -3,13 +3,16 @@ import GenericButton from "../Generic/GenericButton";
 import { termIdToString } from "../../common/utils";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Plan } from "../../common/types";
+import EditableTextField from "../Generic/EditableTextField";
 
 function PlanInfoDisplay({
   plan,
   handleRemovePlan,
+  setPlanName,
 }: {
   plan: Plan;
   handleRemovePlan: () => void;
+  setPlanName: (name: string) => void;
 }) {
   return (
     <Box
@@ -22,9 +25,12 @@ function PlanInfoDisplay({
       }}
     >
       <Box>
-        <Typography variant="h2" sx={{ wordBreak: "break-word" }}>
-          {plan.name}
-        </Typography>
+        {plan.isEmpty ? (
+          <Typography variant="h2">No Plan Selected</Typography>
+        ) : (
+          <EditableTextField name={plan.name} setName={setPlanName} />
+        )}
+
         <Typography variant="subtitle1">
           {plan.isEmpty ? "" : plan.campus + " " + termIdToString(plan.term)}
         </Typography>

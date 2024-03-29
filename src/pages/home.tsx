@@ -5,24 +5,25 @@ import CourseDropdown from "../components/Course/CourseDropdown";
 import SidebarContainer from "../components/Layout/SidebarContainer";
 import { Box } from "@mui/material";
 import Schedule from "../components/Schedule/Schedule";
-import usePlan from "../hooks/usePlan";
+import usePlans from "../hooks/usePlans";
 import AddPlanModal from "../components/Plan/AddPlanModal";
 import SelectPlan from "../components/Plan/SelectPlan";
-import usePlans from "../hooks/usePlans";
 import PlanInfoDisplay from "../components/Plan/PlanInfoDisplay";
 
 function Home() {
   const {
     plan,
+    plans,
+    addPlan,
+    removePlan,
     emptyPlan,
     setPlan,
+    setPlanName,
     addCourse,
     removeCourse,
     addSection,
     removeSection,
-  } = usePlan();
-
-  const { plans, addPlan, removePlan } = usePlans();
+  } = usePlans();
 
   function handleRemovePlan() {
     removePlan(plan);
@@ -34,7 +35,11 @@ function Home() {
   return (
     <Box sx={{ display: "flex", flexDirection: "row", height: "50vw" }}>
       <SidebarContainer>
-        <PlanInfoDisplay plan={plan} handleRemovePlan={handleRemovePlan} />
+        <PlanInfoDisplay
+          plan={plan}
+          handleRemovePlan={handleRemovePlan}
+          setPlanName={setPlanName}
+        />
         <Box
           sx={{
             display: "flex",
@@ -43,7 +48,6 @@ function Home() {
           }}
         >
           {plan.courses.map((course) => {
-            console.log(course);
             return (
               <CourseDropdown
                 setHoverSection={setHoverSection}

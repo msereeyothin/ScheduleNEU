@@ -12,12 +12,12 @@ function SelectPlan({
   setPlan: (plan: Plan) => void;
 }) {
   const handlePlanChange = (event: SelectChangeEvent) => {
-    let planName = event.target.value as string;
-    let curPlan = plans.find((plan) => plan.name === planName);
+    let planID = event.target.value as string;
+    let curPlan = plans.find((plan) => plan.name === planID);
     if (curPlan) {
       setPlan(curPlan);
     } else {
-      console.error(`Plan "${planName}" not found.`);
+      console.error(`Plan wtih ID:${planID} not found.`);
     }
   };
 

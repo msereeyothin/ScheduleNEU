@@ -61,3 +61,7 @@ export const termIds = ["2023", "2024"]
     `${year}60`,
   ])
   .flat();
+
+export function generateID() {
+  return Math.random().toString(16).slice(2);
+}
