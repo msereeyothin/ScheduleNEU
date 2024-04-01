@@ -23,7 +23,9 @@ export function courseNodeToString(course: Course) {
 }
 
 export function alreadyExists(course: Course, courseList: Course[]) {
-  return !courseList.includes(course);
+  return courseList.some(existingCourse => 
+    existingCourse.subject === course.subject && existingCourse.classId === course.classId
+  );
 }
 
 export function secondsToTime(seconds: number) {
