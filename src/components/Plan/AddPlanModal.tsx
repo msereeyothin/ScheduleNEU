@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Campus, Plan, campusValues } from "../../common/types";
 import GenericButton from "../Generic/GenericButton";
 import GenericModal from "../Generic/GenericModal";
+import { useTermInfos } from "../../hooks/useTermInfos";
 import {
   Typography,
   Box,
@@ -12,7 +13,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import { termIds, termIdToString, generateID } from "../../common/utils";
+import { generateID } from "../../common/utils";
 
 interface AddPlanModalProps {
   addPlan: (newPlan: Plan) => void;
@@ -25,6 +26,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
   const [term, setTerm] = React.useState("");
   const [campus, setCampus] = React.useState<Campus>();
   const [valid, setValid] = React.useState(false);
+  const { termInfos, isLoading, error } = useTermInfos();
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -37,6 +39,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
   const handleCampusChange = (event: SelectChangeEvent) => {
     setCampus(event.target.value as Campus);
   };
+
   useEffect(() => {
     if (name !== "" && term !== "" && campus) {
       setValid(true);
@@ -93,11 +96,20 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
           <FormControl fullWidth margin="dense">
             <InputLabel>Select Term</InputLabel>
             <Select value={term} label="Term" onChange={handleTermChange}>
-              {termIds.map((term) => (
-                <MenuItem key={term} value={term}>
-                  {termIdToString(term)}
-                </MenuItem>
-              ))}
+              {isLoading ? (
+                <MenuItem disabled>Loading...</MenuItem>
+              ) : error ? (
+                <MenuItem disabled>Error fetching terms</MenuItem>
+              ) : termInfos.length === 0 ? (
+                <MenuItem disabled>Empty terms returned</MenuItem>
+              ) :
+                (
+                  termInfos.map(({ termId, text }) => (
+                    <MenuItem key={termId} value={termId}>
+                      {text}
+                    </MenuItem>
+                  ))
+                )}
             </Select>
           </FormControl>
 

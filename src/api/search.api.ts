@@ -41,6 +41,28 @@ class SearchAPIClient {
 
     return courses;
   };
+
+  async fetchTermInfos(subCollege: string) {
+    const response = await this.axios({
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data: JSON.stringify({
+        query: `
+          query TermInfos($subCollege: String!) {
+            termInfos(subCollege: $subCollege) {
+              termId
+              text
+            }
+          }`,
+        variables: {
+          subCollege: subCollege,
+        },
+      }),
+    });
+    const termInfos = response.data.data.termInfos;
+    return termInfos;
+  }
+
 }
 
 export const SearchAPI = new SearchAPIClient();

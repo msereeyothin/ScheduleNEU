@@ -82,3 +82,8 @@ export const campusValues: Campus[] = [
   "Toronto, Canada",
   "Vancouver, Canada",
 ];
+
+export interface TermInfo {
+  termId: string;
+  text: string;
+}
