@@ -33,17 +33,24 @@ const SectionItem: React.FC<SectionItem2Props> = ({
   };
 
   const handleOnHover = (section: Section) => {
-    setHoverSection([section]);
+    if (!isSelected) {
+      setHoverSection([section]);
+    }
   };
   const handleMouseLeave = () => {
     setHoverSection([]);
+  };
+
+  const handleClick = () => {
+    onClick();
+    handleMouseLeave();
   };
 
   return (
     <div
       onMouseOver={() => handleOnHover(section)}
       onMouseLeave={handleMouseLeave}
-      onClick={onClick}
+      onClick={handleClick}
     >
       <Box sx={style}>
         Section {sectionIndex + 1}: {section.campus}
