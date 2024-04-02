@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Campus, Plan, campusValues } from "../../common/types";
 import GenericButton from "../Generic/GenericButton";
 import GenericModal from "../Generic/GenericModal";
+import { useFetchTermInfos } from "../../hooks/useFetchTermInfos";
 import {
   Typography,
   Box,
@@ -12,9 +13,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-// import { termIds, termIdToString, generateID } from "../../common/utils";
-import { termIdToString, generateID } from "../../common/utils";
-import { SearchAPI } from "../../api/search.api";
+import { generateID } from "../../common/utils";
 
 interface AddPlanModalProps {
   addPlan: (newPlan: Plan) => void;
@@ -27,7 +26,8 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
   const [term, setTerm] = React.useState("");
   const [campus, setCampus] = React.useState<Campus>();
   const [valid, setValid] = React.useState(false);
-  const [fetchedTermIds, setFetchedTermIds] = useState([]);
+  const subCollege = "NEU";
+  const { termInfos } = useFetchTermInfos(subCollege);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -40,6 +40,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
   const handleCampusChange = (event: SelectChangeEvent) => {
     setCampus(event.target.value as Campus);
   };
+
   useEffect(() => {
     if (name !== "" && term !== "" && campus) {
       setValid(true);
@@ -47,6 +48,12 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
       setValid(false);
     }
   }, [name, term, campus]);
+
+  useEffect(() => {
+    if (termInfos?.length > 0) {
+      setTerm(termInfos[0].termId);
+    }
+  }, [termInfos]);
 
   const handleAddPlan = () => {
     if (campus) {
@@ -66,27 +73,6 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
     setTerm("");
     setCampus(undefined);
   };
-
-  // useEffect hook to fetch term information from the API
-  useEffect(() => {
-    const subCollege = "NEU";
-    const fetchTermInfos = async () => {
-      try {
-        let termInfos = await SearchAPI.fetchTermInfos(subCollege);
-        // only display first 10 terms
-        termInfos = termInfos.slice(0, 10);
-        setFetchedTermIds(termInfos);
-        if (termInfos.length > 0) {
-          setTerm(termInfos[0].termId);// Defaults to the first term
-        }
-      } catch (error) {
-        console.error("Failed to fetch term infos", error);
-      }
-    };
-
-    fetchTermInfos();
-  }, []);
-
 
   return (
     <>
@@ -117,7 +103,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
           <FormControl fullWidth margin="dense">
             <InputLabel>Select Term</InputLabel>
             <Select value={term} label="Term" onChange={handleTermChange}>
-              {fetchedTermIds.map(({ termId, text }) => (
+              {termInfos?.map(({ termId, text }) => (
                 <MenuItem key={termId} value={termId}>
                   {text} {/* Uses text from the API*/}
                 </MenuItem>

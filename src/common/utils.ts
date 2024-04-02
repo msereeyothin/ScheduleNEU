@@ -23,7 +23,7 @@ export function courseNodeToString(course: Course) {
 }
 
 export function alreadyExists(course: Course, courseList: Course[]) {
-  return courseList.some(existingCourse => 
+  return courseList.some(existingCourse =>
     existingCourse.subject === course.subject && existingCourse.classId === course.classId
   );
 }
@@ -54,16 +54,6 @@ export function sectionsToEvents(sections: Section[], backgroundColor = "") {
   });
   return events;
 }
-
-export const termIds = ["2023", "2024"]
-  .map((year) => [
-    `${year}10`,
-    `${year}30`,
-    `${year}40`,
-    `${year}50`,
-    `${year}60`,
-  ])
-  .flat();
 
 export function generateID() {
   return Math.random().toString(16).slice(2);
