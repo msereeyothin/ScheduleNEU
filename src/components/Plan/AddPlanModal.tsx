@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Campus, Plan, campusValues } from "../../common/types";
 import GenericButton from "../Generic/GenericButton";
 import GenericModal from "../Generic/GenericModal";
-import { useFetchTermInfos } from "../../hooks/useFetchTermInfos";
+import { useTermInfos } from "../../hooks/useTermInfos";
 import {
   Typography,
   Box,
@@ -26,8 +26,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
   const [term, setTerm] = React.useState("");
   const [campus, setCampus] = React.useState<Campus>();
   const [valid, setValid] = React.useState(false);
-  const subCollege = "NEU";
-  const { termInfos } = useFetchTermInfos(subCollege);
+  const { termInfos, isLoading, error } = useTermInfos();
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -48,12 +47,6 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
       setValid(false);
     }
   }, [name, term, campus]);
-
-  useEffect(() => {
-    if (termInfos?.length > 0) {
-      setTerm(termInfos[0].termId);
-    }
-  }, [termInfos]);
 
   const handleAddPlan = () => {
     if (campus) {
@@ -103,11 +96,20 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
           <FormControl fullWidth margin="dense">
             <InputLabel>Select Term</InputLabel>
             <Select value={term} label="Term" onChange={handleTermChange}>
-              {termInfos?.map(({ termId, text }) => (
-                <MenuItem key={termId} value={termId}>
-                  {text} {/* Uses text from the API*/}
-                </MenuItem>
-              ))}
+              {isLoading ? (
+                <MenuItem disabled>Loading...</MenuItem>
+              ) : error ? (
+                <MenuItem disabled>Error fetching terms</MenuItem>
+              ) : termInfos.length === 0 ? (
+                <MenuItem disabled>Empty terms returned</MenuItem>
+              ) :
+                (
+                  termInfos.map(({ termId, text }) => (
+                    <MenuItem key={termId} value={termId}>
+                      {text}
+                    </MenuItem>
+                  ))
+                )}
             </Select>
           </FormControl>
 
