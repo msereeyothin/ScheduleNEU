@@ -72,7 +72,9 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
     const subCollege = "NEU";
     const fetchTermInfos = async () => {
       try {
-        const termInfos = await SearchAPI.fetchTermInfos(subCollege);
+        let termInfos = await SearchAPI.fetchTermInfos(subCollege);
+        // only display first 10 terms
+        termInfos = termInfos.slice(0, 10);
         setFetchedTermIds(termInfos);
         if (termInfos.length > 0) {
           setTerm(termInfos[0].termId);// Defaults to the first term
