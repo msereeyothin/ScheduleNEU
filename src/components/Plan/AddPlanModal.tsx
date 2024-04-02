@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Campus, Plan, campusValues } from "../../common/types";
 import GenericButton from "../Generic/GenericButton";
 import GenericModal from "../Generic/GenericModal";
@@ -12,7 +12,9 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import { termIds, termIdToString, generateID } from "../../common/utils";
+// import { termIds, termIdToString, generateID } from "../../common/utils";
+import { termIdToString, generateID } from "../../common/utils";
+import { SearchAPI } from "../../api/search.api";
 
 interface AddPlanModalProps {
   addPlan: (newPlan: Plan) => void;
@@ -25,6 +27,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
   const [term, setTerm] = React.useState("");
   const [campus, setCampus] = React.useState<Campus>();
   const [valid, setValid] = React.useState(false);
+  const [fetchedTermIds, setFetchedTermIds] = useState([]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -64,6 +67,25 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
     setCampus(undefined);
   };
 
+  // useEffect hook to fetch term information from the API
+  useEffect(() => {
+    const subCollege = "NEU";
+    const fetchTermInfos = async () => {
+      try {
+        const termInfos = await SearchAPI.fetchTermInfos(subCollege);
+        setFetchedTermIds(termInfos);
+        if (termInfos.length > 0) {
+          setTerm(termInfos[0].termId);// Defaults to the first term
+        }
+      } catch (error) {
+        console.error("Failed to fetch term infos", error);
+      }
+    };
+
+    fetchTermInfos();
+  }, []);
+
+
   return (
     <>
       <GenericButton onClick={handleOpen}>
@@ -93,9 +115,9 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
           <FormControl fullWidth margin="dense">
             <InputLabel>Select Term</InputLabel>
             <Select value={term} label="Term" onChange={handleTermChange}>
-              {termIds.map((term) => (
-                <MenuItem key={term} value={term}>
-                  {termIdToString(term)}
+              {fetchedTermIds.map(({ termId, text }) => (
+                <MenuItem key={termId} value={termId}>
+                  {text} {/* Uses text from the API*/}
                 </MenuItem>
               ))}
             </Select>
