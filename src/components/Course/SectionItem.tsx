@@ -2,7 +2,7 @@ import { Section } from "../../common/types";
 import { Box } from "@mui/material";
 import WeekDisplay from "./MeetingDisplay/WeekDisplay";
 
-interface SectionItem2Props {
+interface SectionItemProps {
   section: Section;
   name: string;
   sectionIndex: number;
@@ -11,9 +11,8 @@ interface SectionItem2Props {
   setHoverSection: React.Dispatch<React.SetStateAction<Section[]>>;
 }
 
-const SectionItem: React.FC<SectionItem2Props> = ({
+const SectionItem: React.FC<SectionItemProps> = ({
   section,
-  name,
   sectionIndex,
   isSelected,
   onClick,
