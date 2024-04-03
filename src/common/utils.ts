@@ -23,8 +23,10 @@ export function courseNodeToString(course: Course) {
 }
 
 export function alreadyExists(course: Course, courseList: Course[]) {
-  return courseList.some(existingCourse =>
-    existingCourse.subject === course.subject && existingCourse.classId === course.classId
+  return courseList.some(
+    (existingCourse) =>
+      existingCourse.subject === course.subject &&
+      existingCourse.classId === course.classId
   );
 }
 
@@ -47,7 +49,8 @@ export function sectionsToEvents(sections: Section[], backgroundColor = "") {
           title: section.name,
           start: `2024-01-0${day}T${start}:00`,
           end: `2024-01-0${day}T${end}:00`,
-          backgroundColor: backgroundColor,
+          color: "rgba(0,0,0,0.5)", // Set to transparent because we want to render the event ourselves
+          customColor: backgroundColor, // Custom props can be accessed with extendedProps
         });
       });
     });
