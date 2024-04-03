@@ -19,7 +19,7 @@ class SearchAPIClient {
         query: `
           {
             search(termId:"${termId}", query: "${searchQuery}", first: ${first}) {
-              nodes { ... on ClassOccurrence { name subject classId sections { meetings campus }
+              nodes { ... on ClassOccurrence { name subject classId sections { meetings campus seatsCapacity seatsRemaining crn profs }
               }
             }
           }
@@ -62,7 +62,6 @@ class SearchAPIClient {
     const termInfos = response.data.data.termInfos;
     return termInfos;
   }
-
 }
 
 export const SearchAPI = new SearchAPIClient();
