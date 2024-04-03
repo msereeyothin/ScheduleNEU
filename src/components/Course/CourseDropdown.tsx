@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { courseNodeToString } from "../../common/utils";
 import RemoveButton from "../Buttons/RemoveButton";
@@ -35,6 +35,18 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [selectedSectionIndex, setSelectedSectionIndex] = useState<number>(-1);
+
+  useEffect(() => {
+    let curSection = plan.sections.find(
+      (section) => section.name === course.name
+    );
+    if (curSection) {
+      const index = course.sections
+        .map((section) => section.crn)
+        .indexOf(curSection.crn);
+      setSelectedSectionIndex(index);
+    }
+  }, [plan, course]);
 
   let prevIndex = -1;
 
