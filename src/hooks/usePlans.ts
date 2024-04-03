@@ -87,7 +87,7 @@ function usePlans() {
     setPlan((oldPlan: Plan) => {
       let newSections = oldPlan.sections;
       newSections = newSections.filter(
-        (oldSection) => JSON.stringify(oldSection) !== JSON.stringify(section)
+        (oldSection) => oldSection.crn !== section.crn
       );
       const newPlan = {
         ...oldPlan,
