@@ -105,12 +105,14 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
                 </span>
                 <div>{course.name}</div>
               </div>
-              <div><RemoveButton
-                onClick={() => {
-                  removeCourse(course);
-                  removeCourseSections();
-                }}
-              ></RemoveButton></div>
+              <div>
+                <RemoveButton
+                  onClick={() => {
+                    removeCourse(course);
+                    removeCourseSections();
+                  }}
+                ></RemoveButton>
+              </div>
             </Box>
             <Box
               sx={{
