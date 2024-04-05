@@ -30,10 +30,13 @@ function AddCourseDisplay({
         <div>
           <span style={{ fontWeight: "bold" }}>
             {courseNodeToString(course)}
-          </span>
-          <div>{course.name}</div>
+          </span>{" "}
+          <br />
+          <span>{course.name}</span>
         </div>
-        <AddButton onClick={onClick} disabled={alreadyAdded}></AddButton>
+        <div>
+          <AddButton onClick={onClick} disabled={alreadyAdded}></AddButton>
+        </div>
       </Box>
     </Box>
   );
