@@ -52,7 +52,7 @@ const SectionItem: React.FC<SectionItemProps> = ({
 
   const isFull = section.seatsRemaining === 0;
   const seatsText = section.seatsRemaining > 0
-    ? `${section.seatsRemaining} of ${section.seatsCapacity} seats remains`
+    ? `${section.seatsRemaining} of ${section.seatsCapacity} seats remaining`
     : "no seats remaining";
 
 
