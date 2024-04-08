@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { sectionsToEvents } from "../../common/utils";
@@ -69,6 +69,7 @@ function renderEventContent(event: any) {
   const backgroundColor = event.event.extendedProps.customColor; // This is how to get custom props
 
   return (
+    <Tooltip title={<Box sx={{padding:"5px"}}>Specific Section Info Here</Box>} arrow>
     <Box
       sx={{
         padding: 0.5,
@@ -81,6 +82,8 @@ function renderEventContent(event: any) {
         <i>{event.event.title}</i>
       </div>
     </Box>
+    </Tooltip>
+
   );
 }
 export default Schedule;
