@@ -32,7 +32,6 @@ const SectionItem: React.FC<SectionItemProps> = ({
     padding: 1.5,
   };
 
-
   const handleOnHover = (section: Section) => {
     if (!isSelected) {
       setHoverSection([section]);
@@ -47,8 +46,9 @@ const SectionItem: React.FC<SectionItemProps> = ({
     handleMouseLeave();
   };
 
-  const iconColor = section.seatsRemaining === 0 ? "error" : "success";
-  const tooltipTitle = section.seatsRemaining === 0 ? "Seats Full" : "Seats Available";
+  const iconColor = section.seatsRemaining === 0 ? "warning" : "success";
+  const tooltipTitle =
+    section.seatsRemaining === 0 ? "No Seats Available!" : "Seats Available";
 
   return (
     <div
@@ -77,14 +77,17 @@ const SectionItem: React.FC<SectionItemProps> = ({
               flexDirection: "row",
             }}
           >
-            <Tooltip title={tooltipTitle}>
+            <Tooltip title={tooltipTitle} arrow>
               <Box
                 sx={{
                   display: "flex",
                   flexDirection: "row",
                 }}
               >
-                <PersonIcon color={iconColor} sx={{ width: "20px", height: "20px" }}></PersonIcon>
+                <PersonIcon
+                  color={iconColor}
+                  sx={{ width: "20px", height: "20px" }}
+                ></PersonIcon>
                 {section.seatsRemaining}/{section.seatsCapacity}
               </Box>
             </Tooltip>
