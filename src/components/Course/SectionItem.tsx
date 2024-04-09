@@ -1,6 +1,7 @@
 import { Section } from "../../common/types";
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import WeekDisplay from "./MeetingDisplay/WeekDisplay";
+import PersonIcon from "@mui/icons-material/Person";
 
 interface SectionItemProps {
   section: Section;
@@ -45,6 +46,10 @@ const SectionItem: React.FC<SectionItemProps> = ({
     handleMouseLeave();
   };
 
+  const iconColor = section.seatsRemaining === 0 ? "warning" : "success";
+  const tooltipTitle =
+    section.seatsRemaining === 0 ? "No Seats Available!" : "Seats Available";
+
   return (
     <div
       onMouseOver={() => handleOnHover(section)}
@@ -52,9 +57,41 @@ const SectionItem: React.FC<SectionItemProps> = ({
       onClick={handleClick}
     >
       <Box sx={style}>
-        Section {sectionIndex + 1}: {section.campus}
-        <Box sx={{ paddingTop: 1 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box>
+            Section {sectionIndex + 1}: {section.campus}
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            paddingTop: 1,
+            justifyContent: "space-between",
+          }}
+        >
           <WeekDisplay section={section}></WeekDisplay>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Tooltip title={tooltipTitle} arrow>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <PersonIcon
+                  color={iconColor}
+                  sx={{ width: "20px", height: "20px" }}
+                ></PersonIcon>
+                {section.seatsRemaining}/{section.seatsCapacity}
+              </Box>
+            </Tooltip>
+          </Box>
         </Box>
       </Box>
     </div>
