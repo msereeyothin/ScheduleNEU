@@ -43,7 +43,8 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
         ></SearchCoursesInput>
         {isLoading && <div>Loading...</div>}
         {error && <div>Trouble finding classes!</div>}
-        {courses &&
+        {searchQuery &&
+          courses &&
           courses.map((course: Course) => (
             <AddCourseDisplay
               course={course}
