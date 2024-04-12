@@ -5,9 +5,6 @@ import "./calendar.css";
 
 // Callback to render the events
 export function renderEventContent(event: any) {
-    const backgroundColor = event.event.extendedProps.customColor; // This is how to get custom props
-    const iconColor =
-      event.event.extendedProps.seatsRemain === 0 ? "warning" : "success";
     const professors = event.event.extendedProps.professors;
     const classCRN = event.event.extendedProps.CRN;
     const classLocation = event.event.extendedProps.location;
@@ -36,7 +33,6 @@ export function renderEventContent(event: any) {
           sx={{
             padding: 0.5,
             height: "100%",
-            backgroundColor: backgroundColor,
             borderRadius: "0px",
           }}
         >

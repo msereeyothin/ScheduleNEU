@@ -52,8 +52,7 @@ export function sectionsToEvents(
           title: section.name,
           start: `2024-01-0${day}T${start}:00`,
           end: `2024-01-0${day}T${end}:00`,
-          color: "rgba(0,0,0,0.5)", // Set to transparent because we want to render the event ourselves
-          customColor: backgroundColor, // Custom props can be accessed with extendedProps
+          color: backgroundColor,
           professors: section.profs,
           location: meeting.where,
           CRN: section.crn,
