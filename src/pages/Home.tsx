@@ -21,8 +21,6 @@ import {
   SortableContext,
   verticalListSortingStrategy,
   sortableKeyboardCoordinates,
-  useSortable,
-  AnimateLayoutChanges,
 } from "@dnd-kit/sortable";
 import { SortableItem } from "../components/Course/SortableItem";
 import { arrayMove } from "../common/utils";
@@ -157,7 +155,7 @@ function Home() {
             <AddPlanModal addPlan={addPlan} setPlan={setPlan}></AddPlanModal>
           </Box>
         </Box>
-        <Box sx={{ width: "75vw" }}>
+        <Box sx={{ width: "70vw" }}>
           <Schedule
             sections={plan.sections}
             hoverSections={hoverSection}

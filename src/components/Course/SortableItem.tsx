@@ -1,6 +1,7 @@
 import React from "react";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
+import { Box } from "@mui/material";
 
 interface SortableItemProps {
   id: string;
@@ -20,12 +21,13 @@ export function SortableItem({ id, children }: SortableItemProps) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    width: "100%",
   };
 
   // Pass listeners, attributes, and setNodeRef as a single object
   return (
-    <div ref={setNodeRef} style={style}>
+    <Box ref={setNodeRef} sx={style}>
       {children({ listeners, attributes, setNodeRef })}
-    </div>
+    </Box>
   );
 }
