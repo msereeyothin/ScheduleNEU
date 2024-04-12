@@ -42,8 +42,8 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
         <SearchCoursesInput
           setSearchQuery={setSearchQuery}
         ></SearchCoursesInput>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-          {isLoading && <ClipLoader color="blue" size={35} />}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', marginTop: '10px' }}>
+          {isLoading && <ClipLoader color="blue" size={30} />}
         </div>
         {error && <div>Trouble finding classes!</div>}
         {searchQuery &&
