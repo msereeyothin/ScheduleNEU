@@ -34,7 +34,10 @@ export function secondsToTime(seconds: number) {
   return new Date(seconds * 1000).toISOString().slice(11, 16);
 }
 
-export function sectionsToEvents(sections: Section[], backgroundColor = "") {
+export function sectionsToEvents(
+  sections: Section[],
+  backgroundColor = "#1d3557"
+) {
   const events: any[] = [];
   sections.forEach((section) => {
     section.meetings.forEach((meeting) => {
@@ -51,6 +54,11 @@ export function sectionsToEvents(sections: Section[], backgroundColor = "") {
           end: `2024-01-0${day}T${end}:00`,
           color: "rgba(0,0,0,0.5)", // Set to transparent because we want to render the event ourselves
           customColor: backgroundColor, // Custom props can be accessed with extendedProps
+          professors: section.profs,
+          location: meeting.where,
+          CRN: section.crn,
+          seatsRemain: section.seatsRemaining,
+          capacity: section.seatsCapacity,
         });
       });
     });

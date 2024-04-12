@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Box, Tooltip } from "@mui/material";
+import { Box, Tooltip, Typography } from "@mui/material";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { sectionsToEvents } from "../../common/utils";
 import "./calendar.css";
 import { Section } from "../../common/types";
+import { renderEventContent } from "./RenderEventContent";
 
 interface ScheduleProps {
   sections: Section[];
@@ -44,46 +45,35 @@ const Schedule: React.FC<ScheduleProps> = ({ sections, hoverSections }) => {
 // Callback to render the slot label AKA the time on the left side
 function renderSlotLabelContent(args: any) {
   //console.log(args);
-  return <Box sx={{
-    padding: '0.5',
-    height: 'auto',
-    minHeight: '28px',
-    marginBottom: '0.5px',
-    fontFamily: 'Arial',
-    fontSize: '13px',
-  }}
-  >{args.text}</Box>;
+  return (
+    <Box
+      sx={{
+        padding: "0.5",
+        height: "auto",
+        minHeight: "28px",
+        marginBottom: "0.5px",
+        fontFamily: "Arial",
+        fontSize: "16px",
+      }}
+    >
+      {args.text}
+    </Box>
+  );
 }
 
 // Callback to render the header days, e.g, Monday Tuesday Tuesday etc.
 function renderDayHeaderContent(args: any) {
   //console.log(args)
-  return <Box sx={{
-    padding: '6px',
-    fontSize: '15px',
-  }}>{args.text}</Box>;
-}
-
-// Callback to render the events
-function renderEventContent(event: any) {
-  const backgroundColor = event.event.extendedProps.customColor; // This is how to get custom props
-
   return (
-    <Tooltip title={<Box sx={{padding:"5px"}}>Specific Section Info Here</Box>} arrow>
     <Box
       sx={{
-        padding: 0.5,
-        height: "100%",
-        backgroundColor: backgroundColor,
+        padding: "6px",
+        fontSize: "15px",
       }}
     >
-      <div onMouseOver={() => console.log("hovering")}>
-        <b>{event.timeText} </b>
-        <i>{event.event.title}</i>
-      </div>
+      {args.text}
     </Box>
-    </Tooltip>
-
   );
 }
+
 export default Schedule;
