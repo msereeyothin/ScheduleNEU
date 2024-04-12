@@ -16,7 +16,7 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({ children }) => {
         overflow: "auto",
         height: "100%",
         width: "100%",
-        backgroundColor: theme.palette.background.default,
+        minWidth : " 230px",
       }}
     >
       {children}

@@ -103,21 +103,21 @@ function Home() {
                   alignItems: "center",
                 }}
               >
-                {plan.courses.map((course) => (
-                  <SortableItem key={course.classId} id={course.classId}>
-                    {(dragHandleProps) => (
-                      <CourseDropdown
-                        setHoverSection={setHoverSection}
-                        plan={plan}
-                        course={course}
-                        removeCourse={removeCourse}
-                        addSection={addSection}
-                        removeSection={removeSection}
-                        dragHandleProps={dragHandleProps}
-                      />
-                    )}
-                  </SortableItem>
-                ))}
+                  {plan.courses.map((course) => (
+                    <SortableItem key={course.classId} id={course.classId}>
+                      {(dragHandleProps) => (
+                        <CourseDropdown
+                          setHoverSection={setHoverSection}
+                          plan={plan}
+                          course={course}
+                          removeCourse={removeCourse}
+                          addSection={addSection}
+                          removeSection={removeSection}
+                          dragHandleProps={dragHandleProps}
+                        />
+                      )}
+                    </SortableItem>
+                  ))}
               </Box>
             </SortableContext>
           </DndContext>
