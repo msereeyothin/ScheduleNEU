@@ -21,8 +21,6 @@ import {
   SortableContext,
   verticalListSortingStrategy,
   sortableKeyboardCoordinates,
-  useSortable,
-  AnimateLayoutChanges,
 } from "@dnd-kit/sortable";
 import { SortableItem } from "../components/Course/SortableItem";
 import { arrayMove } from "../common/utils";
@@ -103,21 +101,21 @@ function Home() {
                   alignItems: "center",
                 }}
               >
-                  {plan.courses.map((course) => (
-                    <SortableItem key={course.classId} id={course.classId}>
-                      {(dragHandleProps) => (
-                        <CourseDropdown
-                          setHoverSection={setHoverSection}
-                          plan={plan}
-                          course={course}
-                          removeCourse={removeCourse}
-                          addSection={addSection}
-                          removeSection={removeSection}
-                          dragHandleProps={dragHandleProps}
-                        />
-                      )}
-                    </SortableItem>
-                  ))}
+                {plan.courses.map((course) => (
+                  <SortableItem key={course.classId} id={course.classId}>
+                    {(dragHandleProps) => (
+                      <CourseDropdown
+                        setHoverSection={setHoverSection}
+                        plan={plan}
+                        course={course}
+                        removeCourse={removeCourse}
+                        addSection={addSection}
+                        removeSection={removeSection}
+                        dragHandleProps={dragHandleProps}
+                      />
+                    )}
+                  </SortableItem>
+                ))}
               </Box>
             </SortableContext>
           </DndContext>
@@ -157,7 +155,7 @@ function Home() {
             <AddPlanModal addPlan={addPlan} setPlan={setPlan}></AddPlanModal>
           </Box>
         </Box>
-        <Box sx={{ width: "75vw" }}>
+        <Box sx={{ width: "70vw" }}>
           <Schedule
             sections={plan.sections}
             hoverSections={hoverSection}
