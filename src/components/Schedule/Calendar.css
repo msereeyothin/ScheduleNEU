@@ -1,0 +1,8 @@
+.fc .fc-timegrid-slot-minor {
+    padding-top: 14px;
+    border-top: none;
+}
+
+.fc {
+    --fc-event-border-color: 'transparent';
+}
