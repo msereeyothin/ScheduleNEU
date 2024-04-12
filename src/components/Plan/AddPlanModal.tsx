@@ -70,7 +70,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
   return (
     <>
       <GenericButton onClick={handleOpen}>
-        <Typography>Add Plan</Typography>
+        <Typography variant="button">Add Plan</Typography>
       </GenericButton>
       <GenericModal open={open} onClose={handleClose}>
         <Box
@@ -80,7 +80,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
             justifyContent: "center",
           }}
         >
-          <Typography>Add Plan</Typography>
+          <Typography variant="subtitle1">Add a new plan</Typography>
 
           <TextField
             margin="dense"
@@ -95,27 +95,33 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
 
           <FormControl fullWidth margin="dense">
             <InputLabel>Select Term</InputLabel>
-            <Select value={term} label="Term" onChange={handleTermChange}>
+            <Select
+              value={term}
+              label="Select Term"
+              onChange={handleTermChange}
+            >
               {isLoading ? (
                 <MenuItem disabled>Loading...</MenuItem>
               ) : error ? (
                 <MenuItem disabled>Error fetching terms</MenuItem>
               ) : termInfos.length === 0 ? (
                 <MenuItem disabled>Empty terms returned</MenuItem>
-              ) :
-                (
-                  termInfos.map(({ termId, text }) => (
-                    <MenuItem key={termId} value={termId}>
-                      {text}
-                    </MenuItem>
-                  ))
-                )}
+              ) : (
+                termInfos.map(({ termId, text }) => (
+                  <MenuItem key={termId} value={termId}>
+                    {text}
+                  </MenuItem>
+                ))
+              )}
             </Select>
           </FormControl>
-
           <FormControl fullWidth margin="dense">
             <InputLabel>Select Campus</InputLabel>
-            <Select value={campus} label="Campus" onChange={handleCampusChange}>
+            <Select
+              value={campus}
+              label={"Select Campus"}
+              onChange={handleCampusChange}
+            >
               {campusValues.map((campus) => (
                 <MenuItem key={campus} value={campus}>
                   {campus}
@@ -131,7 +137,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
                 handleAddPlan();
               }}
             >
-              Add Plan
+              <Typography variant="button">Add Plan</Typography>
             </GenericButton>
           </Box>
         </Box>

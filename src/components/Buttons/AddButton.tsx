@@ -12,11 +12,10 @@ const AddButton: React.FC<AddButtonProps> = ({ onClick, disabled }) => {
     <Fab
       disabled={disabled}
       size="small"
-      color="primary"
-      aria-label="add"
       onClick={onClick}
+      sx={{ backgroundColor: "transparent", boxShadow: 0 }}
     >
-      <AddIcon />
+      <AddIcon color="primary" sx={{ width: "25px", height: "25px" }} />
     </Fab>
   );
 };
