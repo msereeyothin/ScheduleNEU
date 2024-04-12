@@ -3,7 +3,7 @@ import Fab from "@mui/material/Fab";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 interface RemoveButtonProps {
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const RemoveButton: React.FC<RemoveButtonProps> = ({ onClick }) => {
