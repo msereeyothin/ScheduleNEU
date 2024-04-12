@@ -69,6 +69,14 @@ export function generateID() {
   return Math.random().toString(16).slice(2);
 }
 
+export function arrayMove<T>(array: T[], fromIndex: number, toIndex: number): T[] {
+  const result = array.slice(); // Make a copy of the array to avoid mutating the original
+  const [removed] = result.splice(fromIndex, 1);
+  result.splice(toIndex, 0, removed);
+  return result;
+}
+
+
 export const dayToString = (day: WeekDay): string => {
   switch (day) {
     case WeekDay.Monday:
