@@ -23,8 +23,10 @@ export function courseNodeToString(course: Course) {
 }
 
 export function alreadyExists(course: Course, courseList: Course[]) {
-  return courseList.some(existingCourse =>
-    existingCourse.subject === course.subject && existingCourse.classId === course.classId
+  return courseList.some(
+    (existingCourse) =>
+      existingCourse.subject === course.subject &&
+      existingCourse.classId === course.classId
   );
 }
 
@@ -32,7 +34,10 @@ export function secondsToTime(seconds: number) {
   return new Date(seconds * 1000).toISOString().slice(11, 16);
 }
 
-export function sectionsToEvents(sections: Section[], backgroundColor = "") {
+export function sectionsToEvents(
+  sections: Section[],
+  backgroundColor = "#1d3557"
+) {
   const events: any[] = [];
   sections.forEach((section) => {
     section.meetings.forEach((meeting) => {
@@ -47,7 +52,12 @@ export function sectionsToEvents(sections: Section[], backgroundColor = "") {
           title: section.name,
           start: `2024-01-0${day}T${start}:00`,
           end: `2024-01-0${day}T${end}:00`,
-          backgroundColor: backgroundColor,
+          color: backgroundColor,
+          professors: section.profs,
+          location: meeting.where,
+          CRN: section.crn,
+          seatsRemain: section.seatsRemaining,
+          capacity: section.seatsCapacity,
         });
       });
     });
@@ -83,3 +93,4 @@ export const dayToString = (day: WeekDay): string => {
       return "Invalid Day";
   }
 };
+
