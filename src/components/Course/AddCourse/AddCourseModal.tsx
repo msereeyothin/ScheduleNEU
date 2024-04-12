@@ -6,7 +6,8 @@ import GenericModal from "../../Generic/GenericModal";
 import GenericButton from "../../Generic/GenericButton";
 import AddCourseDisplay from "./AddCourseDisplay";
 import { alreadyExists } from "../../../common/utils";
-import ClipLoader from 'react-spinners/ClipLoader';
+import ClipLoader from "react-spinners/ClipLoader";
+import { Typography } from "@mui/material";
 
 interface AddCourseModalProps {
   campus: Campus;
@@ -37,13 +38,23 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
   return (
     <>
-      <GenericButton onClick={handleOpen}>Add Course</GenericButton>
+      <GenericButton onClick={handleOpen}>
+        <Typography variant="button">Add Course</Typography>
+      </GenericButton>
       <GenericModal open={open} onClose={handleClose}>
         <SearchCoursesInput
           setSearchQuery={setSearchQuery}
         ></SearchCoursesInput>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', marginTop: '10px' }}>
-          {isLoading && <ClipLoader color="blue" size={30} />}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            marginTop: "10px",
+          }}
+        >
+          {isLoading && <ClipLoader size={30} />}
         </div>
         {error && <div>Trouble finding classes!</div>}
         {searchQuery &&

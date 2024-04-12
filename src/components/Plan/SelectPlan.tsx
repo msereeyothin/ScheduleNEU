@@ -25,7 +25,11 @@ function SelectPlan({
     <Box width={"70%"}>
       <FormControl fullWidth>
         <InputLabel>Select Plan</InputLabel>
-        <Select value={plan.name} label="Plan" onChange={handlePlanChange}>
+        <Select
+          value={plan.name}
+          label="Select Plan"
+          onChange={handlePlanChange}
+        >
           {plans.map((plan) => (
             <MenuItem value={plan.name}> {plan.name}</MenuItem>
           ))}
