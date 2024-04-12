@@ -6,6 +6,7 @@ import GenericModal from "../../Generic/GenericModal";
 import GenericButton from "../../Generic/GenericButton";
 import AddCourseDisplay from "./AddCourseDisplay";
 import { alreadyExists } from "../../../common/utils";
+import ClipLoader from 'react-spinners/ClipLoader';
 
 interface AddCourseModalProps {
   campus: Campus;
@@ -41,9 +42,12 @@ const AddCourseModal: React.FC<AddCourseModalProps> = ({
         <SearchCoursesInput
           setSearchQuery={setSearchQuery}
         ></SearchCoursesInput>
-        {isLoading && <div>Loading...</div>}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', marginTop: '10px' }}>
+          {isLoading && <ClipLoader color="blue" size={30} />}
+        </div>
         {error && <div>Trouble finding classes!</div>}
-        {courses &&
+        {searchQuery &&
+          courses &&
           courses.map((course: Course) => (
             <AddCourseDisplay
               course={course}
