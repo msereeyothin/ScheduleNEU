@@ -6,23 +6,11 @@ import InfoIcon from '@mui/icons-material/Info';
 
 function TopBar() {
   return (
-    <AppBar position="relative" style={{ minHeight: '85px' }}>
+    <AppBar position="relative" color="inherit">
       <Toolbar>
-        <img src={Logo} alt="ScheduleNEU Logo" style={{ height: 70, marginRight: 20 }} />
-        <Typography
-          variant="h6"
-          component="div"
-          style={{
-            fontFamily: "'Baloo 2', sans-serif",
-            fontSize: '32px',
-            fontWeight: '400',
-            lineHeight: '50.37px',
-            textAlign: 'left',
-            flexGrow: 1,
-            marginTop: '10px',
-          }}
-        >
-          ScheduleNEU
+        <Typography variant="h1">Schedule</Typography>
+        <Typography variant="h1" color="primary">
+          NEU
         </Typography>
         <IconButton
           color="inherit"

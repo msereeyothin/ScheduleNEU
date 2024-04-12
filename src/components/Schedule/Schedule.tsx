@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Tooltip, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { sectionsToEvents } from "../../common/utils";
@@ -13,9 +13,10 @@ interface ScheduleProps {
 }
 
 const Schedule: React.FC<ScheduleProps> = ({ sections, hoverSections }) => {
+  const theme = useTheme();
   const events = [
-    sectionsToEvents(sections),
-    sectionsToEvents(hoverSections, "lightblue"),
+    sectionsToEvents(sections, theme.palette.secondary.main),
+    sectionsToEvents(hoverSections, theme.palette.secondary.light),
   ].flat();
 
   return (
@@ -44,7 +45,6 @@ const Schedule: React.FC<ScheduleProps> = ({ sections, hoverSections }) => {
 
 // Callback to render the slot label AKA the time on the left side
 function renderSlotLabelContent(args: any) {
-  //console.log(args);
   return (
     <Box
       sx={{
@@ -56,22 +56,20 @@ function renderSlotLabelContent(args: any) {
         fontSize: "16px",
       }}
     >
-      {args.text}
+      <Typography variant="body1">{args.text}</Typography>
     </Box>
   );
 }
 
 // Callback to render the header days, e.g, Monday Tuesday Tuesday etc.
 function renderDayHeaderContent(args: any) {
-  //console.log(args)
   return (
     <Box
       sx={{
         padding: "6px",
-        fontSize: "15px",
       }}
     >
-      {args.text}
+      <Typography variant="subtitle1">{args.text}</Typography>
     </Box>
   );
 }

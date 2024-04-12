@@ -3,50 +3,42 @@ import { createTheme } from "@mui/material";
 const Theme = createTheme({
   palette: {
     primary: {
-      main: "#1d3557", // Dark blue color
+      main: "#c92c38",
     },
     secondary: {
-      main: "#e63946", // Red color
+      main: "#1C3557",
+      light: "#ADD8E6",
     },
     background: {
-      default: "#e7e9e9", // Light gray color
+      default: "#F5F6F8",
     },
   },
   typography: {
-    fontFamily: "Roboto, Arial, sans-serif",
+    fontFamily: "Poppins, Roboto, Arial, sans-serif",
     fontSize: 16,
-
     h1: {
-      fontSize: "2.5rem",
-      fontWeight: 600,
+      fontSize: 30,
+      fontWeight: 800,
     },
     h2: {
-      fontSize: "2rem",
+      fontSize: 30,
       fontWeight: 600,
-    },
-    h3: {
-      fontSize: "1.75rem",
+      color: "#1C3557",
     },
     subtitle1: {
-      fontSize: "1rem",
-    },
-    subtitle2: {
-      fontSize: "0.875rem",
+      fontSize: 16,
+      fontWeight: 600,
+      color: "#1C3557",
     },
     body1: {
-      fontSize: "1rem",
-    },
-    body2: {
-      fontSize: "0.875rem",
+      fontSize: 16,
+      fontWeight: 300,
+      color: "#1C3557",
     },
     button: {
-      fontSize: "1rem",
-    },
-    caption: {
-      fontSize: "0.75rem",
-    },
-    overline: {
-      fontSize: "0.75rem",
+      fontSize: 16,
+      fontWeight: 500,
+      color: "#F5F6F8",
     },
   },
 });
