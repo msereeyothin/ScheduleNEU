@@ -11,6 +11,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SectionItem from "./SectionItem";
 import { Course, Section, Plan } from "../../common/types";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 
 interface CourseDropDownProps {
   plan: Plan;
@@ -19,6 +20,13 @@ interface CourseDropDownProps {
   removeCourse: (course: Course) => void;
   addSection: (section: Section) => void;
   removeSection: (section: Section) => void;
+  dragHandleProps: DragHandleProps;
+}
+
+interface DragHandleProps {
+  listeners: any;
+  attributes: any;
+  setNodeRef: React.Ref<any>;
 }
 
 const accordionStyle = {
@@ -32,6 +40,7 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
   removeCourse,
   addSection,
   removeSection,
+  dragHandleProps,
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [selectedSectionIndex, setSelectedSectionIndex] = useState<number>(-1);
@@ -50,7 +59,8 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
 
   let prevIndex = -1;
 
-  const toggleExpanded = () => {
+  const toggleExpanded = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setExpanded(!expanded);
   };
 
@@ -87,8 +97,17 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
     });
   };
 
+  const onRemoveCourse = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevents the accordion from toggling when removing a course
+    removeCourse(course);
+    removeCourseSections();
+  };
+
   return (
-    <Box sx={{ width: "100%", paddingBottom: 1 }}>
+    <Box
+      sx={{ width: "100%", paddingBottom: 1 }}
+      ref={dragHandleProps.setNodeRef}
+    >
       <Accordion expanded={expanded} square={true} sx={accordionStyle}>
         <AccordionSummary>
           <Box sx={{ width: "100%" }}>
@@ -96,23 +115,47 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
               sx={{
                 display: "flex",
                 flexDirection: "row",
+                width: "100%",
                 justifyContent: "space-between",
               }}
             >
-              <div>
-                <span style={{ fontWeight: "bold" }}>
-                  {courseNodeToString(course)}
-                </span>
-                <div>{course.name}</div>
-              </div>
-              <div>
-                <RemoveButton
-                  onClick={() => {
-                    removeCourse(course);
-                    removeCourseSections();
+              <div
+                {...dragHandleProps.listeners}
+                {...dragHandleProps.attributes}
+                style={{ cursor: "grab", marginRight: "10px" }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
                   }}
-                ></RemoveButton>
+                >
+                  <DragIndicatorIcon />
+                  <div>
+                    <span style={{ fontWeight: "bold" }}>
+                      {courseNodeToString(course)}
+                    </span>
+                    <div>{course.name}</div>
+                  </div>
+                </Box>
               </div>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div>
+                    <RemoveButton onClick={onRemoveCourse}></RemoveButton>
+                  </div>
+                </Box>
+              </Box>
             </Box>
             <Box
               sx={{
