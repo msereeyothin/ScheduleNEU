@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const User = require("../models/User");
-const { v4: uuidv4 } = require("uuid");
+import User from "../models/Plan.js";
+import { v4 as uuidv4 } from "uuid";
 
 router.post("/", async (req, res) => {
   try {
@@ -20,4 +20,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,18 +1,20 @@
-import { addPlanApi, deletePlanApi, updatePlanApi } from "../api/plansAPI";
+//import { addPlanApi, deletePlanApi, updatePlanApi } from "../api/plansAPI";
 import { Course, Plan, Section } from "../common/types";
 import React from "react";
+import { PlanAPI } from "../api/plansAPI";
 
 function usePlans() {
   const [plans, setPlans] = React.useState<Plan[]>([]);
 
   function addPlan(plan: Plan) {
-    const uuid = localStorage.getItem('uuid');
-    addPlanApi(uuid, plan).then(newPlan => {
-      console.log("Plan added with ID:", newPlan._id);
-      setPlans(prevPlans => [...prevPlans, newPlan]);
-    }).catch(error => {
-      console.error('Failed to add plan', error);
-    });
+    PlanAPI.addPlan(plan); // Handle more stuff
+    //const uuid = localStorage.getItem('uuid');
+    // addPlanApi(plan).then(newPlan => {
+    //   console.log("Plan added with ID:", newPlan._id);
+    //   setPlans(prevPlans => [...prevPlans, newPlan]);
+    // }).catch(error => {
+    //   console.error('Failed to add plan', error);
+    // });
   }
 
   function removePlan(plan: Plan) {
@@ -34,14 +36,14 @@ function usePlans() {
       return;
     }
 
-    updatePlanApi(uuid, updatedPlan._id, updatedPlan).then(response => {
-      console.log("plan id:", plan._id);
-      setPlans((prevPlans) =>
-        prevPlans.map((plan) => (plan._id === updatedPlan._id ? response : plan))
-      );
-    }).catch(error => {
-      console.error('Failed to update plan', error);
-    });
+    // updatePlanApi(uuid, updatedPlan._id, updatedPlan).then(response => {
+    //   console.log("plan id:", plan._id);
+    //   setPlans((prevPlans) =>
+    //     prevPlans.map((plan) => (plan._id === updatedPlan._id ? response : plan))
+    //   );
+    // }).catch(error => {
+    //   console.error('Failed to update plan', error);
+    // });
   }
 
 
