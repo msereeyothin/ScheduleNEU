@@ -35,7 +35,7 @@ export interface Course {
 }
 
 export interface Plan {
-  id: string;
+  _id: string;
   name: string;
   term: string;
   isEmpty: boolean;
@@ -90,4 +90,9 @@ export const campusValues: Campus[] = [
 export interface TermInfo {
   termId: string;
   text: string;
+}
+
+export interface UserData {
+  uuid: string;
+  plans: Plan[];
 }

@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import AddCourseModal from "../components/Course/AddCourse/AddCourseModal";
-import React from "react";
-import { Section } from "../common/types";
+import React, { useEffect } from "react";
+import { Section, UserData } from "../common/types";
 import CourseDropdown from "../components/Course/CourseDropdown";
 import SidebarContainer from "../components/Layout/SidebarContainer";
 import { Box } from "@mui/material";
@@ -25,6 +26,10 @@ import {
 import { SortableItem } from "../components/Course/SortableItem";
 import { arrayMove } from "../common/utils";
 import { UniqueIdentifier } from "@dnd-kit/core";
+import { useUserSession } from '../hooks/useUserSession';
+
+
+
 
 function Home() {
   const {
@@ -40,6 +45,19 @@ function Home() {
     addSection,
     removeSection,
   } = usePlans();
+
+  const userData = useUserSession() as UserData | null;
+
+
+  useEffect(() => {
+    console.log("User Data:", userData);
+    if (userData && userData.plans.length > 0) {
+      setPlan(userData.plans[0]);
+    }
+  }, [userData, setPlan]);
+
+
+  const [hoverSection, setHoverSection] = React.useState<Section[]>([]);
 
   function handleRemovePlan() {
     removePlan(plan);
@@ -69,7 +87,9 @@ function Home() {
     }
   }
 
-  const [hoverSection, setHoverSection] = React.useState<Section[]>([]);
+  // if (!userData || userData.plans.length === 0) {
+  //   return <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>Loading...</Box>;
+  // }
 
   return (
     <Box sx={{ display: "flex", flexDirection: "row", height: "50vw" }}>
