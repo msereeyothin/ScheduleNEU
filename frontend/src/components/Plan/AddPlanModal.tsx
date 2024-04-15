@@ -51,7 +51,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
   const handleAddPlan = () => {
     if (campus) {
       const newPlan = {
-        id: generateID(),
+        _id: generateID(),
         name: name,
         term: term,
         isEmpty: false,
