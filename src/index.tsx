@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import Theme from "./common/theme";
 import Layout from "./components/Layout/Layout";
+import Landing from "./pages/Landing";
 
 const theme = Theme;
 
@@ -15,7 +16,8 @@ const Root = () => (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Landing />}></Route>
+          <Route path="/home" element={<Home />}></Route>
           <Route path="/about" element={<About></About>}></Route>
         </Route>
       </Routes>
