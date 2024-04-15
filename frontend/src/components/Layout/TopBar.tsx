@@ -1,8 +1,9 @@
-import React from "react";
 import { AppBar, Box, Typography, IconButton } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Logo from "../../assets/ScheduleNU_Logo_01_Artboard_2.svg";
 import InfoIcon from "@mui/icons-material/Info";
+import { Link } from "react-router-dom";
+
 
 function TopBar() {
   return (
@@ -48,7 +49,8 @@ function TopBar() {
             size="large"
             color="secondary"
             aria-label="about"
-            href="/about"
+            component={Link}
+            to="/about"
             target="_blank"
           >
             <InfoIcon />

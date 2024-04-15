@@ -49,7 +49,6 @@ function usePlans() {
     });
   }
 
-
   function updatePlans(updatedPlan: Plan) {
     console.log("Updating plan with ID:", updatedPlan._id);
     if (!updatedPlan._id) {
@@ -119,7 +118,6 @@ function usePlans() {
         ...oldPlan,
         courses: newCourses,
       };
-      updatePlans(newPlan);
       return newPlan;
     });
   }
@@ -149,6 +147,25 @@ function usePlans() {
       return newPlan;
     });
   }
+
+  function updateSection(newSection: Section, oldSection: Section) {
+    setPlan(oldPlan => {
+      let newSections = oldPlan.sections.filter(
+        (section) => section.crn !== oldSection.crn
+      );
+
+      newSections = [...newSections, newSection];
+
+      const newPlan = {
+        ...oldPlan,
+        sections: newSections,
+      };
+      updatePlans(newPlan);
+
+      return newPlan;
+    });
+  }
+
   return {
     plans,
     addPlan,
@@ -161,6 +178,7 @@ function usePlans() {
     removeCourse,
     addSection,
     removeSection,
+    updateSection,
   };
 }
 

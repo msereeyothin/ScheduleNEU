@@ -20,6 +20,7 @@ interface CourseDropDownProps {
   removeCourse: (course: Course) => void;
   addSection: (section: Section) => void;
   removeSection: (section: Section) => void;
+  updateSection: (newSection: Section, oldSection: Section) => void;
   dragHandleProps: DragHandleProps;
 }
 
@@ -40,6 +41,7 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
   removeCourse,
   addSection,
   removeSection,
+  updateSection,
   dragHandleProps,
 }) => {
   const [expanded, setExpanded] = useState(false);
@@ -76,17 +78,15 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
 
   // Updates the course that is highlighted when clicked
   const updateSelectedSections = (sectionIndex: number) => {
-    if (sectionIndex !== -1) {
+    if (sectionIndex !== -1 && prevIndex !== -1) {
+      updateSection(course.sections[sectionIndex], course.sections[prevIndex]);
+    } else if (sectionIndex !== -1) {
       addSection(course.sections[sectionIndex]);
-      if (prevIndex !== -1) {
-        removeSection(course.sections[prevIndex]);
-      }
-    } else {
-      if (prevIndex !== -1) {
-        removeSection(course.sections[prevIndex]);
-      }
+    } else if (prevIndex !== -1) {
+      removeSection(course.sections[prevIndex]);
     }
   };
+  
 
   // Remove all sections under this course
   const removeCourseSections = () => {

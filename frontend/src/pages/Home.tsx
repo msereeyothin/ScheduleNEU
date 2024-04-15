@@ -44,6 +44,7 @@ function Home() {
     removeCourse,
     addSection,
     removeSection,
+    updateSection,
   } = usePlans();
 
   const userData = useUserSession() as UserData | null;
@@ -131,6 +132,7 @@ function Home() {
                         removeCourse={removeCourse}
                         addSection={addSection}
                         removeSection={removeSection}
+                        updateSection={updateSection}
                         dragHandleProps={dragHandleProps}
                       />
                     )}
