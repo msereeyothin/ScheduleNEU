@@ -3,9 +3,11 @@ import { AppBar, Box, Typography, IconButton } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Logo from "../../assets/ScheduleNU_Logo_01_Artboard_2.svg";
 import InfoIcon from "@mui/icons-material/Info";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function TopBar() {
+  const navigate = useNavigate();
   return (
     <AppBar position="relative" color="inherit" sx={{ minHeight: "75px" }}>
       <Box
@@ -19,6 +21,7 @@ function TopBar() {
       >
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Box
+            onClick={() => navigate("/")}
             sx={{
               display: "flex",
               flexDirection: "row",

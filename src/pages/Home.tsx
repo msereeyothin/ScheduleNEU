@@ -71,7 +71,7 @@ function Home() {
       <Box sx={{ padding: 2 }}>
         <Box
           sx={{
-            width: "40%",
+            width: "50%",
             display: "flex",
             direction: "row",
             paddingBottom: 2,
