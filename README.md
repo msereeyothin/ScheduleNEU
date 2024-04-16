@@ -1,6 +1,7 @@
 # ScheduleNEU
 
 A scheduling planning alternative with the abilitiy to one-click optimize schedules for Northeastern University students.
+Access the website here: https://www.scheduleneu.com/
 
 to get started:
 - clone the repository
