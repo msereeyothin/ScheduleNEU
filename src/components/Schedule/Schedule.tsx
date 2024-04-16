@@ -32,7 +32,7 @@ const Schedule: React.FC<ScheduleProps> = ({ sections, hoverSections }) => {
         slotMaxTime={"22:00:00"}
         nowIndicator={false}
         initialDate={"2024-01-01"}
-        height={"45vw"}
+        height={"39vw"}
         themeSystem="bootstrap5"
         dayHeaderFormat={{ weekday: "long" }}
         dayHeaderContent={renderDayHeaderContent}

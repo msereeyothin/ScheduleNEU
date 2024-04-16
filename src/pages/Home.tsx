@@ -33,7 +33,7 @@ function Home() {
   const [hoverSection, setHoverSection] = React.useState<Section[]>([]);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "row", height: "50vw" }}>
+    <Box sx={{ display: "flex", flexDirection: "row" }}>
       <SidebarContainer>
         <PlanInfoDisplay
           plan={plan}
