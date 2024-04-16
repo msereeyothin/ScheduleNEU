@@ -3,8 +3,11 @@ import { AppBar, Box, Typography, IconButton } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Logo from "../../assets/ScheduleNU_Logo_01_Artboard_2.svg";
 import InfoIcon from "@mui/icons-material/Info";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function TopBar() {
+  const navigate = useNavigate();
   return (
     <AppBar position="relative" color="inherit" sx={{ minHeight: "75px" }}>
       <Box
@@ -16,24 +19,27 @@ function TopBar() {
           padding: 1.5,
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginLeft: "1%",
-          }}
-        >
-          <img
-            src={Logo}
-            alt="ScheduleNEU Logo"
-            style={{ height: "70px", marginRight: "5px" }}
-          />
-          <Typography variant="h1">Schedule</Typography>
-          <Typography variant="h1" color="primary">
-            NEU
-          </Typography>
-        </Box>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Box
+            onClick={() => navigate("/")}
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              marginLeft: "1%",
+            }}
+          >
+            <img
+              src={Logo}
+              alt="ScheduleNEU Logo"
+              style={{ height: "70px", marginRight: "5px" }}
+            />
+            <Typography variant="h1">Schedule</Typography>
+            <Typography variant="h1" color="primary">
+              NEU
+            </Typography>
+          </Box>
+        </Link>
         <Box
           sx={{
             display: "flex",
