@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import AddCourseModal from "../components/Course/AddCourse/AddCourseModal";
-import React from "react";
-import { Section } from "../common/types";
+import React, { useEffect } from "react";
+import { Section, UserData } from "../common/types";
+import CourseDropdown from "../components/Course/CourseDropdown";
 import SidebarContainer from "../components/Layout/SidebarContainer";
 import { Box } from "@mui/material";
 import Schedule from "../components/Schedule/Schedule";
@@ -8,7 +10,27 @@ import usePlans from "../hooks/usePlans";
 import AddPlanModal from "../components/Plan/AddPlanModal";
 import SelectPlan from "../components/Plan/SelectPlan";
 import PlanInfoDisplay from "../components/Plan/PlanInfoDisplay";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  sortableKeyboardCoordinates,
+} from "@dnd-kit/sortable";
+import { SortableItem } from "../components/Course/SortableItem";
+import { arrayMove } from "../common/utils";
+import { UniqueIdentifier } from "@dnd-kit/core";
+import { useUserSession } from '../hooks/useUserSession';
 import DraggableCourses from "../components/Course/DraggableCourses";
+
+
+
 
 function Home() {
   const {
@@ -23,7 +45,18 @@ function Home() {
     removeCourse,
     addSection,
     removeSection,
+    updateSection,
   } = usePlans();
+
+  const userData = useUserSession() as UserData | null;
+
+
+  useEffect(() => {
+    console.log("User Data:", userData);
+    if (userData && userData.plans.length > 0) {
+      setPlan(userData.plans[0]);
+    }
+  }, [userData, setPlan]);
 
   function handleRemovePlan() {
     removePlan(plan);
@@ -46,6 +79,7 @@ function Home() {
           setHoverSection={setHoverSection}
           removeCourse={removeCourse}
           addSection={addSection}
+          updateSection={updateSection}
           removeSection={removeSection}
         ></DraggableCourses>
         <Box
@@ -71,7 +105,7 @@ function Home() {
       <Box sx={{ padding: 2 }}>
         <Box
           sx={{
-            width: "50%",
+            width: "40%",
             display: "flex",
             direction: "row",
             paddingBottom: 2,
