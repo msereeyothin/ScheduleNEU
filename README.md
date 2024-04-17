@@ -9,7 +9,7 @@ ScheduleNEU is built using the MERN stack includes the following technologies:
 - React
 - TypeScript
 
-# Demo
+## Demo
 
 Access the website here: [https://www.scheduleneu.com/](https://www.scheduleneu.com/)
 
