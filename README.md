@@ -13,7 +13,7 @@ ScheduleNEU is built using the MERN stack includes the following technologies:
 
 Access the website here: [https://www.scheduleneu.com/](https://www.scheduleneu.com/)
 
-[Figma Wireframe](https://www.figma.com/file/5ot3rDigKjxpk38FgFinha/ScheduleNEU?type=design&node-id=0%3A1&mode=design&t=gHcvl7o0YIVduRnt-1)
+Access the Figma Wireframe here: [Figma Wireframe](https://www.figma.com/file/5ot3rDigKjxpk38FgFinha/ScheduleNEU?type=design&node-id=0%3A1&mode=design&t=gHcvl7o0YIVduRnt-1)
 
 ## Running ScheduleNEU locally
 
