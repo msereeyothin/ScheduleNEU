@@ -11,7 +11,7 @@ const getOrCreateUUID = (): string => {
 };
 
 const fetchUserData = async (uuid: string): Promise<any> => {
-    const response = await fetch('https://www.scheduleneu.com/api/session', {
+    const response = await fetch('http://localhost:8081/api/session', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

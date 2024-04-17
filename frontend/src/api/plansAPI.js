@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://www.scheduleneu.com/api/plans";
+const API_BASE_URL = "http://localhost:8081/api/plans";
 
 export const addPlanApi = async (uuid, plan) => {
   try {
