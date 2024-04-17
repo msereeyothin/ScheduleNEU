@@ -37,7 +37,7 @@ const Theme = createTheme({
     },
     button: {
       fontSize: 16,
-      fontWeight: 500,
+      fontWeight: 600,
       color: "#F5F6F8",
     },
   },

@@ -8,7 +8,7 @@ class Connection {
     if (!connection) {
       try {
         dotenv.config();
-        await mongoose.connect(process.env.MONG_URI);
+        await mongoose.connect(process.env.MONGO_URI);
         connection = mongoose.connection;
         mongoose.connection
           .on("open", () => console.log("DATABASE STATE", "Connection Open"))
