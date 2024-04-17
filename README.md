@@ -20,7 +20,7 @@ Access the Figma Wireframe here: [Figma Wireframe](https://www.figma.com/file/5o
 Running the application locally entails running both a frontend and the backend service, if you don't need the backend service to
 save your plan & schedule, running just frontend is entirely fine.
 
-to get started:
+### To get started:
 - clone the repository
 - Follow the instruction below to set up the frontend and backend
 
