@@ -1,12 +1,12 @@
 # ScheduleNEU
 
-A scheduling planning alternative with the abilitiy to one-click optimize schedules for Northeastern University students.
+A scheduling planning alternative with the ability to one-click optimize schedules for Northeastern University students.
 
 ScheduleNEU is built using the MERN stack includes the following technologies:
 - MongoDB
 - Express.js
-- Node.js
 - React
+- Node.js
 - TypeScript
 
 ## Demo
@@ -22,11 +22,11 @@ save your plan & schedule, running just frontend is entirely fine.
 
 ### To get started:
 - clone the repository
-- Follow the instruction below to set up the frontend and backend
+- Follow the instructions below to set up the frontend and backend
 
 ### Setting up the frontend
 1. Install npm:
-   Ensure npm (node package manager) are installed on your machine.
+   Ensure npm (node package manager) is installed on your machine.
 
 2. Install dependencies:
    Run the command ```npm i or npm install``` in the backend directory to install the necessary dependencies.
