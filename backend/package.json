@@ -1,11 +1,14 @@
 {
-  "name": "backend",
+  "name": "scheduleneu-backend",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start:db": "docker run --name mongodb -d -p 27017:27017 mongodb/mongodb-community-server:6.0-ubi8",
+    "start:app": "node app.js",
+    "start": "npm run start:db && npm run start:app",
+    "stop:db": "docker stop mongodb && docker rm mongodb",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
