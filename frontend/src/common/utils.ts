@@ -44,7 +44,7 @@ export function sectionsToEvents(
       Object.entries(meeting.times).forEach(([day, meetingTimes]) => {
         let start;
         let end;
-        meetingTimes.map((time) => {
+        meetingTimes.forEach((time) => {
           start = `${secondsToTime(time.start)}`;
           end = `${secondsToTime(time.end)}`;
         });

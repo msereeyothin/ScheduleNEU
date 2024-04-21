@@ -1,0 +1,24 @@
+{
+  "name": "scheduleneu-root",
+  "version": "1.0.0",
+  "description": "A scheduling planning alternative with the ability to one-click optimize schedules for Northeastern University students.",
+  "scripts": {
+    "backend": "npm start --prefix backend",
+    "frontend": "npm start --prefix frontend",
+    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msereeyothin/ScheduleNEU.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msereeyothin/ScheduleNEU/issues"
+  },
+  "homepage": "https://github.com/msereeyothin/ScheduleNEU#readme",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
