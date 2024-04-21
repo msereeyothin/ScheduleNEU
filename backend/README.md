@@ -20,6 +20,8 @@ This is the backend service for ScheduleNEU built with Express.js, Node.js, and 
 
 5. Run **npm start** to start the backend server:
    The application will then run on [http://localhost:8081](http://localhost:8081). If you change the port, make sure to also update the corresponding settings in the frontend application.
+   
+**WARNING:** running ```npm start``` will cause an error if you already have an instance of your local database running (because it tries to start the db again). If you are already running the db, you only need to start the node server by running ```npm run start:app```. You can stop the database by running ```npm run stop:db```. Checkout `package.json` for the full list of commands.
 
 ### Additional Information
 Ensure that your MongoDB service is running on a server that can be connected to. If you are using a local database service like `mongodb://localhost:27017/mydb`, ensure the database service is started.
