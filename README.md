@@ -31,7 +31,7 @@ save your plan & schedule, running just frontend is entirely fine.
 2. Install dependencies:
    Run the command ```npm i or npm install``` in the backend directory to install the necessary dependencies.
 
-3. Run ```npm start``` to start the development server.
+3. Run ```npm start``` to start the front end development server.
 
 ### Setting up the backend
 1. Install Node.js and npm:

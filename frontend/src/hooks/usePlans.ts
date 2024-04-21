@@ -1,52 +1,59 @@
-import { addPlanApi, deletePlanApi, updatePlanApi, fetchPlansApi } from "../api/plansAPI";
+import { planAPI } from "../api/plans.api";
 import { Course, Plan, Section } from "../common/types";
 import React from "react";
 
 function usePlans() {
   const [plans, setPlans] = React.useState<Plan[]>([]);
 
-
   React.useEffect(() => {
-    const uuid = localStorage.getItem('uuid');
+    const uuid = localStorage.getItem("uuid");
     if (uuid) {
-      fetchPlansApi(uuid).then(fetchedPlans => {
-        setPlans(fetchedPlans);
-        if (fetchedPlans.length > 0) {
-          setPlan(fetchedPlans[0]);
-        }
-      }).catch(error => {
-        console.error('Failed to fetch plans', error);
-      });
+      planAPI
+        .fetchPlans(uuid)
+        .then((fetchedPlans) => {
+          setPlans(fetchedPlans);
+          if (fetchedPlans.length > 0) {
+            setPlan(fetchedPlans[0]);
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to fetch plans", error);
+        });
     }
   }, []);
 
   function addPlan(plan: Plan) {
-    const uuid = localStorage.getItem('uuid');
-    addPlanApi(uuid, plan).then(plan => {
-      console.log("Plan added with ID:", plan._id);
-      setPlans(prevPlans => [...prevPlans, plan]);
-    }).catch(error => {
-      console.error('Failed to add plan', error);
-      setPlans((prevPlans) => [...prevPlans, plan]);
-    });
+    const uuid = localStorage.getItem("uuid");
+    planAPI
+      .addPlan(uuid, plan)
+      .then((plan) => {
+        console.log("Plan added with ID:", plan._id);
+        setPlans((prevPlans) => [...prevPlans, plan]);
+      })
+      .catch((error) => {
+        console.error("Failed to add plan", error);
+        setPlans((prevPlans) => [...prevPlans, plan]);
+      });
   }
 
   function removePlan(plan: Plan) {
-    const uuid = localStorage.getItem('uuid');
+    const uuid = localStorage.getItem("uuid");
     if (!uuid) {
-      console.error('UUID not found');
+      console.error("UUID not found");
       return;
     }
-
-    deletePlanApi(uuid, plan._id).then(() => {
-      setPlans(prevPlans => prevPlans.filter(p => p._id !== plan._id));
-      console.log("Plan removed with ID:", plan._id);
-    }).catch(error => {
-      console.error('Failed to delete plan', error);
-      setPlans((prevPlans) =>
-        prevPlans.filter((prevPlan) => prevPlan._id !== plan._id)
-      );
-    });
+    planAPI
+      .deletePlans(uuid, plan._id)
+      .then(() => {
+        setPlans((prevPlans) => prevPlans.filter((p) => p._id !== plan._id));
+        console.log("Plan removed with ID:", plan._id);
+      })
+      .catch((error) => {
+        console.error("Failed to delete plan", error);
+        setPlans((prevPlans) =>
+          prevPlans.filter((prevPlan) => prevPlan._id !== plan._id)
+        );
+      });
   }
 
   function updatePlans(updatedPlan: Plan) {
@@ -56,25 +63,31 @@ function usePlans() {
       return;
     }
 
-    const uuid = localStorage.getItem('uuid');
+    const uuid = localStorage.getItem("uuid");
     if (!uuid) {
-      console.error('UUID not found');
+      console.error("UUID not found");
       return;
     }
 
-    updatePlanApi(uuid, updatedPlan._id, updatedPlan).then(plan => {
-      console.log("plan id:", plan._id);
-      setPlans((prevPlans) =>
-        prevPlans.map((plan) => (plan._id === updatedPlan._id ? updatedPlan : plan))
-      );
-    }).catch(error => {
-      console.error('Failed to update plan', error);
-      setPlans((prevPlans) =>
-        prevPlans.map((plan) => (plan._id === updatedPlan._id ? updatedPlan : plan))
-      );
-    });
+    planAPI
+      .updatePlan(uuid, updatedPlan._id, updatedPlan)
+      .then((plan) => {
+        console.log("plan id:", plan._id);
+        setPlans((prevPlans) =>
+          prevPlans.map((plan) =>
+            plan._id === updatedPlan._id ? updatedPlan : plan
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Failed to update plan", error);
+        setPlans((prevPlans) =>
+          prevPlans.map((plan) =>
+            plan._id === updatedPlan._id ? updatedPlan : plan
+          )
+        );
+      });
   }
-
 
   const emptyPlan: Plan = {
     _id: "",
@@ -99,10 +112,10 @@ function usePlans() {
   }
 
   function addCourse(course: Course) {
-    setPlan(oldPlan => {
+    setPlan((oldPlan) => {
       const newPlan = {
         ...oldPlan,
-        courses: [...oldPlan.courses, course]
+        courses: [...oldPlan.courses, course],
       };
       updatePlans(newPlan);
       return newPlan;
@@ -123,10 +136,10 @@ function usePlans() {
   }
 
   function addSection(section: Section) {
-    setPlan(oldPlan => {
+    setPlan((oldPlan) => {
       const newPlan = {
         ...oldPlan,
-        sections: [...oldPlan.sections, section]
+        sections: [...oldPlan.sections, section],
       };
       updatePlans(newPlan);
       return newPlan;
@@ -149,7 +162,7 @@ function usePlans() {
   }
 
   function updateSection(newSection: Section, oldSection: Section) {
-    setPlan(oldPlan => {
+    setPlan((oldPlan) => {
       let newSections = oldPlan.sections.filter(
         (section) => section.crn !== oldSection.crn
       );
