@@ -23,22 +23,22 @@ const Theme = createTheme({
     h2: {
       fontSize: 30,
       fontWeight: 600,
-      color: "#1C3557",
+    },
+    h3: {
+      fontSize: 23,
+      fontWeight: 600,
     },
     subtitle1: {
       fontSize: 16,
       fontWeight: 600,
-      color: "#1C3557",
     },
     body1: {
       fontSize: 16,
       fontWeight: 300,
-      color: "#1C3557",
     },
     button: {
       fontSize: 16,
       fontWeight: 600,
-      color: "#F5F6F8",
     },
   },
 });

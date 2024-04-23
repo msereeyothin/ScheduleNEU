@@ -32,7 +32,7 @@ const Schedule: React.FC<ScheduleProps> = ({ sections, hoverSections }) => {
         slotMaxTime={"22:00:00"}
         nowIndicator={false}
         initialDate={"2024-01-01"}
-        height={"45vw"}
+        height={"78vh"}
         themeSystem="bootstrap5"
         dayHeaderFormat={{ weekday: "long" }}
         dayHeaderContent={renderDayHeaderContent}
@@ -50,7 +50,6 @@ function renderSlotLabelContent(args: any) {
       sx={{
         padding: "0.5",
         height: "auto",
-        minHeight: "28px",
         marginBottom: "0.5px",
         fontFamily: "Arial",
         fontSize: "16px",

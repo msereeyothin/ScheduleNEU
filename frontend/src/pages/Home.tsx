@@ -2,14 +2,13 @@
 import AddCourseModal from "../components/Course/AddCourse/AddCourseModal";
 import React, { useEffect } from "react";
 import { Section, UserData } from "../common/types";
-import SidebarContainer from "../components/Layout/SidebarContainer";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import Schedule from "../components/Schedule/Schedule";
 import usePlans from "../hooks/usePlans";
 import AddPlanModal from "../components/Plan/AddPlanModal";
 import SelectPlan from "../components/Plan/SelectPlan";
 import PlanInfoDisplay from "../components/Plan/PlanInfoDisplay";
-import { useUserSession } from '../hooks/useUserSession';
+import { useUserSession } from "../hooks/useUserSession";
 import DraggableCourses from "../components/Course/DraggableCourses";
 
 function Home() {
@@ -43,10 +42,19 @@ function Home() {
   }
 
   const [hoverSection, setHoverSection] = React.useState<Section[]>([]);
+  const theme = useTheme();
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "row", height: "50vw" }}>
-      <SidebarContainer>
+    <Box sx={{ display: "flex", flexDirection: "row", height: "90vh" }}>
+      {/* Sidebar with courses */}
+      <Box
+        sx={{
+          padding: 3,
+          overflow: "auto",
+          width: "100%",
+          backgroundColor: theme.palette.background.default,
+        }}
+      >
         <PlanInfoDisplay
           plan={plan}
           handleRemovePlan={handleRemovePlan}
@@ -80,11 +88,13 @@ function Home() {
             ></AddCourseModal>
           )}
         </Box>
-      </SidebarContainer>
+      </Box>
       <Box sx={{ padding: 2 }}>
+        {/* Plan Controls */}
         <Box
           sx={{
             width: "40%",
+            height: "5vh",
             display: "flex",
             direction: "row",
             paddingBottom: 2,
@@ -96,7 +106,8 @@ function Home() {
             <AddPlanModal addPlan={addPlan} setPlan={setPlan}></AddPlanModal>
           </Box>
         </Box>
-        <Box sx={{ width: "70vw" }}>
+        {/* Schedule */}
+        <Box sx={{ width: "70vw", maxHeight: "80vh" }}>
           <Schedule
             sections={plan.sections}
             hoverSections={hoverSection}

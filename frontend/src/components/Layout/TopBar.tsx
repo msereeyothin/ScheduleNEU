@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Box, Typography, IconButton } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import Logo from "../../assets/ScheduleNU_Logo_01_Artboard_2.svg";
+import Logo from "../../assets/ScheduleNEULogo.svg";
 import InfoIcon from "@mui/icons-material/Info";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 function TopBar() {
   const navigate = useNavigate();
   return (
-    <AppBar position="relative" color="inherit" sx={{ minHeight: "75px" }}>
+    <AppBar position="relative" color="inherit" sx={{ minHeight: "10vh" }}>
       <Box
         sx={{
           display: "flex",
@@ -54,15 +54,14 @@ function TopBar() {
             size="large"
             color="secondary"
             aria-label="about"
-            href="/about"
-            target="_blank"
+            onClick={() => navigate("/about")}
           >
             <InfoIcon />
           </IconButton>
           <IconButton
             color="secondary"
             aria-label="github"
-            href="https://github.com/msereeyothin/ScheduleNu"
+            href="https://github.com/msereeyothin/ScheduleNEU"
             target="_blank"
           >
             <GitHubIcon />

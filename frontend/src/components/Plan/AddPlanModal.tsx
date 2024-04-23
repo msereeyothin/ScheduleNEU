@@ -69,9 +69,7 @@ function AddPlanModal({ addPlan, setPlan }: AddPlanModalProps) {
 
   return (
     <>
-      <GenericButton onClick={handleOpen}>
-        <Typography variant="button">Add Plan</Typography>
-      </GenericButton>
+      <GenericButton onClick={handleOpen}>Add Plan</GenericButton>
       <GenericModal open={open} onClose={handleClose}>
         <Box
           sx={{
