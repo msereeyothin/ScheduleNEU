@@ -1,6 +1,8 @@
 # ScheduleNEU
 
-A scheduling planning alternative with the ability to one-click optimize schedules for Northeastern University students.
+A scheduling planning alternative with the ability to one-click optimize schedules for Northeastern University students. 
+
+[Read the documentation here!](https://scheduleneudocs.notion.site/d23d5dd30b354af5b75ce469b3c50b93?v=efddf972b3094b1b97b667cea9c6d522)
 
 ScheduleNEU is built using the MERN stack includes the following technologies:
 - MongoDB
