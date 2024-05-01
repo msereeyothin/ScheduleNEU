@@ -1,5 +1,5 @@
 import Axios, { AxiosInstance } from "axios";
-import { Course } from "../common/types";
+import { Course } from "../utils/types";
 
 class SearchAPIClient {
   private axios: AxiosInstance;

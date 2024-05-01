@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { courseNodeToString } from "../../common/utils";
+import { courseNodeToString } from "../../utils/utils";
 import RemoveButton from "../Buttons/RemoveButton";
 import {
   Box,
@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SectionItem from "./SectionItem";
-import { Course, Section, Plan } from "../../common/types";
+import { Course, Section, Plan } from "../../utils/types";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 
 interface CourseDropDownProps {
@@ -86,7 +86,6 @@ const CourseDropdown: React.FC<CourseDropDownProps> = ({
       removeSection(course.sections[prevIndex]);
     }
   };
-  
 
   // Remove all sections under this course
   const removeCourseSections = () => {

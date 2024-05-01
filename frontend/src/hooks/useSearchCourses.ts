@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { Course, Campus } from "../common/types";
+import { Course, Campus } from "../utils/types";
 import { SearchAPI } from "../api/search.api";
 
 type SearchCoursesReturn = {

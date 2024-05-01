@@ -1,7 +1,7 @@
 import React from "react";
-import { Course } from "../../../common/types";
+import { Course } from "../../../utils/types";
 import { Box } from "@mui/material";
-import { courseNodeToString } from "../../../common/utils";
+import { courseNodeToString } from "../../../utils/utils";
 import AddButton from "../../Buttons/AddButton";
 
 function AddCourseDisplay({

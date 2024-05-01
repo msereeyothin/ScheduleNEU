@@ -1,11 +1,11 @@
 import React from "react";
-import { Campus, Course } from "../../../common/types";
+import { Campus, Course } from "../../../utils/types";
 import { useSearchCourses } from "../../../hooks/useSearchCourses";
 import SearchCoursesInput from "./SearchCoursesInput";
 import GenericModal from "../../Generic/GenericModal";
 import GenericButton from "../../Generic/GenericButton";
 import AddCourseDisplay from "./AddCourseDisplay";
-import { alreadyExists } from "../../../common/utils";
+import { alreadyExists } from "../../../utils/utils";
 import ClipLoader from "react-spinners/ClipLoader";
 import { Typography } from "@mui/material";
 

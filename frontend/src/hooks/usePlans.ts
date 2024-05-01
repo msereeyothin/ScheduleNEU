@@ -1,5 +1,5 @@
 import { planAPI } from "../api/plans.api";
-import { Course, Plan, Section } from "../common/types";
+import { Course, Plan, Section } from "../utils/types";
 import React from "react";
 
 function usePlans() {

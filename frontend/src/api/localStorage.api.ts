@@ -1,4 +1,4 @@
-import { Plan } from "../common/types";
+import { Plan } from "../utils/types";
 
 /**
  *

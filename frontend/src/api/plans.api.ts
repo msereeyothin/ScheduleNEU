@@ -1,6 +1,6 @@
 import Axios, { AxiosInstance } from "axios";
 
-import { Plan } from "../common/types";
+import { Plan } from "../utils/types";
 
 const API_BASE_URL = "http://localhost:8081/api/plans";
 

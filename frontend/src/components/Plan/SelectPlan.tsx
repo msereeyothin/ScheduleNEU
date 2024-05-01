@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import { Plan } from "../../common/types";
-import { SelectChangeEvent, Box } from "@mui/material";
+import { Plan } from "../../utils/types";
+import { SelectChangeEvent } from "@mui/material";
 
 function SelectPlan({
   plan,
@@ -22,20 +22,14 @@ function SelectPlan({
   };
 
   return (
-    <Box width={"70%"}>
-      <FormControl fullWidth>
-        <InputLabel>Select Plan</InputLabel>
-        <Select
-          value={plan.name}
-          label="Select Plan"
-          onChange={handlePlanChange}
-        >
-          {plans.map((plan) => (
-            <MenuItem value={plan.name}> {plan.name}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Box>
+    <FormControl sx={{width:"20vw"}}>
+      <InputLabel>Select Plan</InputLabel>
+      <Select value={plan.name} label="Select Plan" onChange={handlePlanChange}>
+        {plans.map((plan) => (
+          <MenuItem value={plan.name}> {plan.name}</MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 }
 

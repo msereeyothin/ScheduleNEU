@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import GenericButton from "../Generic/GenericButton";
-import { termIdToString } from "../../common/utils";
+import { termIdToString } from "../../utils/utils";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Plan } from "../../common/types";
+import { Plan } from "../../utils/types";
 import EditableTextField from "../Generic/EditableTextField";
 
 function PlanInfoDisplay({

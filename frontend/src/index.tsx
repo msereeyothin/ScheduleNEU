@@ -5,8 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@mui/material";
 import About from "./pages/About";
 import Home from "./pages/Home";
-import Theme from "./common/theme";
-import Layout from "./components/Layout/Layout";
+import Theme from "./theme/theme";
+import Layout from "./layout/Layout";
 import Landing from "./pages/Landing";
 
 const theme = Theme;
