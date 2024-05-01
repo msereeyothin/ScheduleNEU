@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Box, Typography, IconButton } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import Logo from "../../assets/ScheduleNEULogo.svg";
+import Logo from "../assets/ScheduleNEULogo.svg";
 import InfoIcon from "@mui/icons-material/Info";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -9,14 +9,18 @@ import { Link } from "react-router-dom";
 function TopBar() {
   const navigate = useNavigate();
   return (
-    <AppBar position="relative" color="inherit" sx={{ minHeight: "10vh" }}>
+    <AppBar
+      position="relative"
+      color="inherit"
+      sx={{ minHeight: "12vh", maxHeight: "12vh" }}
+    >
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
           width: "100%",
           justifyContent: "space-between",
-          padding: 1.5,
+          padding: "1%",
         }}
       >
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
@@ -32,7 +36,7 @@ function TopBar() {
             <img
               src={Logo}
               alt="ScheduleNEU Logo"
-              style={{ height: "70px", marginRight: "5px" }}
+              style={{ height: "70px", marginRight: "0.5vw" }}
             />
             <Typography variant="h1">Schedule</Typography>
             <Typography variant="h1" color="primary">

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Campus, Plan, campusValues } from "../../common/types";
+import { Campus, Plan, campusValues } from "../../utils/types";
 import GenericButton from "../Generic/GenericButton";
 import GenericModal from "../Generic/GenericModal";
 import { useTermInfos } from "../../hooks/useTermInfos";
@@ -13,7 +13,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import { generateID } from "../../common/utils";
+import { generateID } from "../../utils/utils";
 
 interface AddPlanModalProps {
   addPlan: (newPlan: Plan) => void;

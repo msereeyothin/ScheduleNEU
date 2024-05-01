@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import AddCourseModal from "../components/Course/AddCourse/AddCourseModal";
 import React, { useEffect } from "react";
-import { Section, UserData } from "../common/types";
+import { Section, UserData } from "../utils/types";
 import { Box, useTheme } from "@mui/material";
 import Schedule from "../components/Schedule/Schedule";
 import usePlans from "../hooks/usePlans";
@@ -45,8 +45,8 @@ function Home() {
   const theme = useTheme();
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "row", height: "90vh" }}>
-      {/* Sidebar with courses */}
+    <Box sx={{ display: "flex", flexDirection: "row" }}>
+      {/* Left sidebar with courses */}
       <Box
         sx={{
           padding: 3,
@@ -89,28 +89,28 @@ function Home() {
           )}
         </Box>
       </Box>
-      <Box sx={{ padding: 2 }}>
+      {/* Right side with plan controls and schedule. Height should not exceed 88vh */}
+      <Box sx={{ height: "88vh" }}>
         {/* Plan Controls */}
         <Box
           sx={{
-            width: "40%",
-            height: "5vh",
+            padding: "2vh",
+            paddingBottom: "0",
             display: "flex",
             direction: "row",
-            paddingBottom: 2,
-            paddingTop: 1,
           }}
         >
           <SelectPlan plan={plan} plans={plans} setPlan={setPlan}></SelectPlan>
-          <Box sx={{ marginLeft: 1 }}>
+          <Box sx={{ marginLeft: "1vw" }}>
             <AddPlanModal addPlan={addPlan} setPlan={setPlan}></AddPlanModal>
           </Box>
         </Box>
         {/* Schedule */}
-        <Box sx={{ width: "70vw", maxHeight: "80vh" }}>
+        <Box sx={{ width: "70vw", padding: "2vh" }}>
           <Schedule
             sections={plan.sections}
             hoverSections={hoverSection}
+            height="74vh"
           ></Schedule>
         </Box>
       </Box>

@@ -4,7 +4,7 @@ import TopBar from "./TopBar";
 
 function Layout() {
   return (
-    <Box>
+    <Box sx={{ overflowX: "hidden" }}>
       <TopBar></TopBar>
       <Outlet />
     </Box>

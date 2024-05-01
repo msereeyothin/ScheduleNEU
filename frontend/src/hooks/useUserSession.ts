@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UserData } from "../common/types";
+import { UserData } from "../utils/types";
 
 const getOrCreateUUID = (): string => {
   let uuid = localStorage.getItem("uuid");

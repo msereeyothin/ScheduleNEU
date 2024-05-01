@@ -1,4 +1,4 @@
-import { Section } from "../../common/types";
+import { Section } from "../../utils/types";
 import { Box, Tooltip } from "@mui/material";
 import WeekDisplay from "./MeetingDisplay/WeekDisplay";
 import PersonIcon from "@mui/icons-material/Person";

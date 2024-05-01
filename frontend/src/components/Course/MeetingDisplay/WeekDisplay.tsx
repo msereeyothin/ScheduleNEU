@@ -1,7 +1,7 @@
-import { Section } from "../../../common/types";
-import { dayToString } from "../../../common/utils";
+import { Section } from "../../../utils/types";
+import { dayToString } from "../../../utils/utils";
 import { Box } from "@mui/material";
-import { secondsToTime } from "../../../common/utils";
+import { secondsToTime } from "../../../utils/utils";
 import DayDisplay from "./DayDisplay";
 
 function WeekDisplay({ section }: { section: Section }) {

@@ -8,8 +8,7 @@ function About() {
   return (
     <Box
       sx={{
-        width: "100%",
-        height: "87vh",
+        height: "88vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -24,7 +23,7 @@ function About() {
       >
         <Box
           sx={{
-            padding: 15,
+            padding: "8vh",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -34,15 +33,15 @@ function About() {
           <Typography variant="h1" sx={{ alignSelf: "flex-start" }}>
             How To Use ScheduleNEU
           </Typography>
-          <ol style={{ marginTop: 40 }}>
+          <ol style={{ paddingTop: "3vh" }}>
             <Typography variant="h3">
               <li>Create A Plan</li>
             </Typography>
-            <Typography>  
+            <Typography>
               Use the "Create Plan" Button to add a new plan. Give your plan a
               name, select your term and campus, and press add.
             </Typography>
-            <Typography variant="h3" sx={{ marginTop: 3 }}>
+            <Typography variant="h3" sx={{ paddingTop: "1.5vh" }}>
               <li>Add Your Courses</li>
             </Typography>
             <Typography>
@@ -50,7 +49,7 @@ function About() {
               plan. You can search a course by the course name, such as "first
               year writing", or by the course code, like "ENGW1111".
             </Typography>
-            <Typography variant="h3" sx={{ marginTop: 3 }}>
+            <Typography variant="h3" sx={{ paddingTop: "1.5vh" }}>
               <li>Build Your Schedule</li>
             </Typography>
             <Typography>
@@ -66,7 +65,7 @@ function About() {
               width: "200px",
               height: "60px",
               borderRadius: "12px",
-              marginTop: 3,
+              marginTop: "1vh",
             }}
             onClick={() => navigate("/home")}
           >
@@ -79,7 +78,6 @@ function About() {
         sx={{
           width: "60%",
           height: "100%",
-          padding: "20px",
           backgroundColor: theme.palette.background.default,
           overflowX: "hidden",
         }}
@@ -88,7 +86,7 @@ function About() {
           sx={{
             width: "100%",
             height: "auto",
-            marginTop: "3vw",
+            marginTop: "5vh",
             marginLeft: "2vw",
           }}
         >

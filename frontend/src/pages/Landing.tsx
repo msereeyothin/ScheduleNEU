@@ -9,8 +9,7 @@ function Landing() {
       sx={{
         display: "flex",
         flexDirection: "row",
-        padding: 15,
-        height: "100%",
+        padding: "8%",
       }}
     >
       {/* Left side with description and buttons*/}
@@ -71,7 +70,7 @@ function Landing() {
         <img
           src={Logo}
           alt="ScheduleNEU Logo"
-          style={{ height: "25vw", marginRight: "5px" }}
+          style={{ height: "50vh", marginRight: "5px" }}
         />
       </Box>
     </Box>
