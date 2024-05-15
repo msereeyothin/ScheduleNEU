@@ -1,1 +1,3 @@
 /node_modules
+frontend/Dockerfile
+frontend/nginx.conf
