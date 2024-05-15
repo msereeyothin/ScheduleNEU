@@ -41,29 +41,34 @@ export function sectionsToEvents(
   const events: any[] = [];
   sections.forEach((section) => {
     section.meetings.forEach((meeting) => {
-      Object.entries(meeting.times).forEach(([day, meetingTimes]) => {
-        let start;
-        let end;
-        meetingTimes.forEach((time) => {
-          start = `${secondsToTime(time.start)}`;
-          end = `${secondsToTime(time.end)}`;
+      if (meeting.times) {
+        Object.entries(meeting.times).forEach(([day, meetingTimes]) => {
+          let start;
+          let end;
+          meetingTimes.forEach((time) => {
+            start = `${secondsToTime(time.start)}`;
+            end = `${secondsToTime(time.end)}`;
+          });
+          events.push({
+            title: section.name,
+            start: `2024-01-0${day}T${start}:00`,
+            end: `2024-01-0${day}T${end}:00`,
+            color: backgroundColor,
+            professors: section.profs,
+            location: meeting.where,
+            CRN: section.crn,
+            seatsRemain: section.seatsRemaining,
+            capacity: section.seatsCapacity,
+          });
         });
-        events.push({
-          title: section.name,
-          start: `2024-01-0${day}T${start}:00`,
-          end: `2024-01-0${day}T${end}:00`,
-          color: backgroundColor,
-          professors: section.profs,
-          location: meeting.where,
-          CRN: section.crn,
-          seatsRemain: section.seatsRemaining,
-          capacity: section.seatsCapacity,
-        });
-      });
+      } else {
+        console.warn(`Meeting times are undefined(online) for section: ${section.name}`);
+      }
     });
   });
   return events;
 }
+
 
 export function generateID() {
   return Math.random().toString(16).slice(2);
