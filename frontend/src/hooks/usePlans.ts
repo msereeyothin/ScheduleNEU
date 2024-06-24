@@ -25,7 +25,7 @@ function usePlans() {
   function addPlan(plan: Plan) {
     const uuid = localStorage.getItem("uuid");
     planAPI
-      .addPlan(uuid, plan)
+      .addPlan(plan)
       .then((plan) => {
         console.log("Plan added with ID:", plan._id);
         setPlans((prevPlans) => [...prevPlans, plan]);

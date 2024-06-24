@@ -11,7 +11,12 @@ class PlanAPI {
     this.axios = Axios.create({ baseURL: baseURL });
   }
 
-  async addPlan(uuid: string | null, plan: Plan) {
+  setAuthToken(token: string) {
+    this.axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+
+  async addPlan(plan: Plan) {
+    const uuid = localStorage.getItem("uuid");
     try {
       const response = await this.axios.post(`${API_BASE_URL}/addPlan`, {
         uuid,

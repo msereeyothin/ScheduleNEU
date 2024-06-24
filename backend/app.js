@@ -1,6 +1,7 @@
 import express from "express";
 import sessionRouter from "./routes/session.routes.js";
 import planRoutes from "./routes/plans.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 import cors from "cors";
 import Connection from "./db/connection.js";
 import dotenv from "dotenv";
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use("/api/session", sessionRouter);
 app.use("/api/plans", planRoutes);
+app.use("/api/auth", authRoutes); 
 
 const PORT = process.env.PORT || 8081;
 Connection.open()

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UserData } from "../utils/types";
 
-const getOrCreateUUID = (): string => {
+export const getOrCreateUUID = (): string => {
   let uuid = localStorage.getItem("uuid");
   if (!uuid) {
     uuid = crypto.randomUUID();
@@ -10,7 +10,7 @@ const getOrCreateUUID = (): string => {
   return uuid;
 };
 
-const fetchUserData = async (uuid: string): Promise<any> => {
+const fetchUserData = async (uuid: string): Promise<UserData> => {
   const response = await fetch("http://localhost:8081/api/session", {
     method: "POST",
     headers: {
@@ -29,7 +29,7 @@ export const useUserSession = () => {
     const uuid = getOrCreateUUID();
     fetchUserData(uuid)
       .then((data) => {
-        setUserData(data as UserData);
+        setUserData(data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);

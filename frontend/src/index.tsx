@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Theme from "./theme/theme";
 import Layout from "./layout/Layout";
 import Landing from "./pages/Landing";
+import AuthComponent from "./pages/AuthComponent";
 
 const theme = Theme;
 
@@ -19,6 +20,7 @@ const Root = () => (
           <Route path="/" element={<Landing />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/about" element={<About></About>}></Route>
+          <Route path="/auth" element={<AuthComponent />} />
         </Route>
       </Routes>
     </BrowserRouter>
