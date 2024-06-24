@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { authAPI } from "../api/auth.api"; // 调整导入路径
+import { authAPI } from "../api/auth.api";
 
 const AuthComponent = () => {
   const [username, setUsername] = useState("");
